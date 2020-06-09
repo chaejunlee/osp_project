@@ -64,7 +64,7 @@ def analyze(tfidf, dictionary, sent_list):
     return top10
 
 
-def insertDoc(url, dictionary): # ElasticSearch에 저장
+def insertDoc(idx, url, dictionary): # ElasticSearch에 저장
     i = 1
     for word in dictionary:
         doc = {
@@ -72,7 +72,7 @@ def insertDoc(url, dictionary): # ElasticSearch에 저장
             "words" : word,
             "frequency": dictionary[word],
         }
-        es.index(index='web', doc_type="word", id=i, body=doc)
+        es.index(index=idx, doc_type="word", id=i, body=doc)
         i += 1
 
 # allWords: 총 단어가 저장되는 리스트
@@ -104,6 +104,10 @@ def findSentList(html_body, sent_list):
 
 def webcrawl(url):
     res = requests.get(url)
+    url = url.replace("http://", "")
+    url = url.replace("https://", "")
+    index = url.split(".")
+    index = index[0]
     html = BeautifulSoup(res.content, "html.parser")
 
     allWords = {} # 사이트에 있는 모든 글자
@@ -117,13 +121,9 @@ def webcrawl(url):
     findWords(allWords, dictionary, sent_list)  # 문장 단위로 추출한 데이터를 단어 단위로 추출
     # allWords는 전체 단어의 갯수, dictionary는 유의한 단어의 갯수
 
-    # insertDoc(url, dictionary)
+    insertDoc(index, url, dictionary)
 
     top10 = analyze(tfidf, dictionary, sent_list)
-    print(len(allWords))
-    print(allWords)
-    print(len(dictionary))
-    print(dictionary)
 
     return top10
 
@@ -136,16 +136,25 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['file1']
         txt = request.form['text1']
-        dictionary = []
+        
         if f: # 파일로 받으면 여기로
-            urls = f.read()
-            i = 0
-            for url in urls:
-                url.replace("\n", "")
-                dictionary[i] = webcrawl(url)
-                i += 1
-            return dictionary
-        if txt: # 텍스트 하나만 받으면 여기로
+            txt = f.read()
+            urls = txt.splitlines()
+            top10 = ''
+            for binUrl in urls:
+                url = binUrl.decode('utf-8')
+                part = webcrawl(url)
+                print(part)
+                i = 1
+                for topWords in part:
+                    top10 += str(i)
+                    top10 += " "
+                    top10 += topWords
+                    top10 += " "
+                    i += 1
+            return top10
+        if txt:  # 텍스트 하나만 받으면 여기로
+            dictionary = []
             url = txt
             url.replace("\n", "")
             dictionary = webcrawl(url)
