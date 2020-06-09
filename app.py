@@ -30,21 +30,7 @@ def webcrawl(url):
     dictionary = {}
     html_body = []
 
-    html_body = html.select('body > div.topnav > div')
-    findWords(html_body, dictionary)
-    html_body = html.select('.nav.navbar-nav.navbar-right')
-    findWords(html_body, dictionary)
-    html_body = html.select('.jumbotron')
-    findWords(html_body, dictionary)
-    html_body = html.select('body > div.feature-list-group > div > div.row.header')
-    findWords(html_body, dictionary)
-    html_body = html.select('.col-md-3.col-sm-3.feature-item')
-    findWords(html_body, dictionary)
-    html_body = html.select('.twitter-follow-button')
-    findWords(html_body, dictionary)
-    html_body = html.select('.twitter-hashtag-button')
-    findWords(html_body, dictionary)
-    html_body = html.select('.col-md-8.trademark')
+    html_body = html.select('body')
     findWords(html_body, dictionary)
     
     words = list(dictionary.keys())
