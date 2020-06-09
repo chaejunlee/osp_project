@@ -11,3 +11,8 @@
 ---
 - 크롤링 구현 완료
 - 33번줄부터 있던 select들을, body tag 하나만 select 하도록 변경. 정상 작동됨.
+
+06/09/20 (이세은)
+---
+- elasticsearch 구현 완료.
+- elasticsearch 실행 : shell script에 적기.
