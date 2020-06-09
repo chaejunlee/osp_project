@@ -13,8 +13,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-def findWords(html_body):
-    dictionary = []
+def findWords(html_body, dictionary):
     for sentence in html_body:
         body = sentence.text
         textSlice = body.split()
@@ -23,37 +22,33 @@ def findWords(html_body):
             if cleanWord:
                 try: dictionary[cleanWord] += 1
                 except: dictionary[cleanWord] = 1
-    return dictionary
 
 def webcrawl(url):
     res = requests.get(url)
     html = BeautifulSoup(res.content, "html.parser")
 
-    dictionary = []
-    html_body = {}
+    dictionary = {}
+    html_body = []
 
     html_body = html.select('body > div.topnav > div')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.nav.navbar-nav.navbar-right')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.jumbotron')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('body > div.feature-list-group > div > div.row.header')
-    dictionary += findWords(html_body)
-    html_body = html.select('body > div.feature-list-group > div > div:nth-child(2)')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.col-md-3.col-sm-3.feature-item')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.twitter-follow-button')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.twitter-hashtag-button')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     html_body = html.select('.col-md-8.trademark')
-    dictionary += findWords(html_body)
+    findWords(html_body, dictionary)
     
-    # words = list(dictionary.keys())
-    # frequency = list(dictionary.values())
-    print(dictionary)
+    words = list(dictionary.keys())
+    frequency = list(dictionary.values())
 
     return dictionary
 
