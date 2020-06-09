@@ -16,3 +16,8 @@
 ---
 - elasticsearch 구현 완료.
 - elasticsearch 실행 : shell script에 적기.
+
+06/09/20 (이채준
+---
+- tfidf 구현 완료
+- 대부분의 함수와 변수에 주석 달았음
