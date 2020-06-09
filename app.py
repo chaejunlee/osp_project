@@ -5,13 +5,34 @@ import pandas as pd
 import re
 import requests
 import sys
+import numpy
 
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, redirect, url_for, request
 from elasticsearch import Elasticsearch
 from werkzeug.utils import secure_filename
+from nltk import word_tokenize
 
 app = Flask(__name__)
+
+host = '127.0.0.1'
+port = '8000'
+es_port = "9200"   
+es = Elasticsearch([{'host':host, 'port':es_port}], timeout=30)
+
+def insertDoc(url, dictionary):
+    i = 1
+    print(dictionary)
+    for word in dictionary:
+        doc = {
+            "url": url,
+            "words" : word,
+            "frequency": dictionary[word],
+        }
+        print(doc)
+        res = es.index(index='web', doc_type="word", id=i, body=doc)
+        i += 1
+        print(res)
 
 def findWords(html_body, dictionary):
     for sentence in html_body:
@@ -33,11 +54,11 @@ def webcrawl(url):
     html_body = html.select('body')
     findWords(html_body, dictionary)
     
-    words = list(dictionary.keys())
-    frequency = list(dictionary.values())
+    
+
+    insertDoc(url, dictionary)
 
     return dictionary
-
 
 @app.route('/')
 def render_file():
@@ -65,4 +86,4 @@ def upload_file():
 
 if __name__ == '__main__':
     # debug를 True로 세팅하면, 해당 서버 세팅 후에 코드가 바뀌어도 문제없이 실행됨. 
-    app.run(host='127.0.0.1', port=8000, debug = True)
+    app.run(host, port, debug = True)
