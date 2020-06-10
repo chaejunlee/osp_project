@@ -1,10 +1,16 @@
 <html>
-    <body>
-        Select File
+    <link rel="stylesheet" href="./main.css">
+
+    <body class="body">
+        <p class="URL_head">Select File</h1>
+
         <form action="http://localhost:8000/file_uploaded" 
         method="POST" enctype="multipart/form-data">
-            <input type="file" name="file1" />
-            <input type="submit" /> 
+            <input class="file_box" type="file" name="file1" />
+            <br>
+            <a class="URL_btn">
+                submit
+            </a>
         </form>
     </body>
 </html>
