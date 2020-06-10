@@ -29,3 +29,4 @@
 - main.html과 main_css.css의 prototype을 만듦.
 - main_css.css를 통해 main.html을 디자인함.
 - **전체 디자인에 대해 팀원들과 상의해보기**
+- url.html을 만들고, url.html에 쓰이는 class들을 main_css.css에 추가함.
