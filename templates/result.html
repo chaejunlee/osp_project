@@ -17,18 +17,34 @@
 
 <body>
     <h1>Result</h1>
-    <h2>elapsedTime</h2>
-    <p>{{elapsedTime}}</p>
-    <h2>totalWordCount</h2>
-    <p>{{totalWordCount}}</p>
-    <h2>index</h2>
-    <p>{{index}}</p>
-    <form action="http://localhost:8000/top10" method="POST">
-        <input type="submit" value='Top 10' name="tfidf" />
-    </form>
-    <form action="http://localhost:8000/cossimil" method="POST">
-        <input type="submit" value='Similarity' name='cossimil'/>
-    </form>
+
+    {% block content %}
+    <div>
+        <div>
+            {% for post in posts %}
+            <article>
+                <h2>elapsedTime</h2>
+                <p>{{ post.elapsedTime }}</p>
+                <h2>totalWordCount</h2>
+                <p>{{ post.totalWordCount }}</p>
+                <h2>index</h2>
+                <p>{{ post.index }}</p>
+            </article>
+
+            <form action="http://localhost:8000/top10" method="POST">
+                <input type="hidden" value="{{ post.index }}" name="tfidf" />
+                <input type="submit" value="Top 10" />
+            </form>
+            <form action="http://localhost:8000/cossimil" method="POST">
+                <input type="hidden" value="{{ post.index }}" name="cossimil" />
+                <input type="submit" value='Similarity' />
+            </form>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endblock %}
 </body>
 
 </html>

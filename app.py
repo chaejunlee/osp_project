@@ -74,8 +74,9 @@ def insertDoc(idx, url, dictionary, docType): # ElasticSearch에 저장
         "url": url,
         "words": words,
         "number": number,
+        "type": docType,
     }
-    es.index(index=idx, doc_type="word", id=docType, body=doc)
+    es.index(index=idx, id=docType, body=doc)
 
 # allWords: 총 단어가 저장되는 리스트
 # dictionary: 유의한 단어를 저장할 리스트
@@ -141,24 +142,47 @@ def webcrawl(url):
 def render_file():
     return render_template('home.html')
 
-@app.route('/top10')
+@app.route('/top10', methods = ['GET', 'POST'])
 def top10():
-    target_index
-    return 
+    if request.method == 'POST':
+        index = request.form['tfidf']
+
+    result = es.search(index=index, body={'query': {'match': {'type': 'top10'}}})
+
+    top = []
+    posts = []
+
+    for data in result['hits']['hits']:
+        top += data['_source'].get('words')
+    
+    i = 1
+    for word in top:
+        posts += [{
+            'number': i,
+            'word': word,
+        }]
+        i += 1
+    
+    return render_template('top10.html', posts=posts)
 
 @app.route('/file_uploaded', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file1']
         txt = request.form['text1']
-
+        posts = []
         if f: # 파일로 받으면 여기로
             txt = f.read()
             urls = txt.splitlines()
             for binUrl in urls:
                 url = binUrl.decode('utf-8')
                 index, elapsedTime, totalWordCount = webcrawl(url)
-            return render_template('result.html', elapsedTime = elapsedTime, totalWordCount = totalWordCount, index=index)
+                posts += [{
+                    'elapsedTime': elapsedTime,
+                    'totalWordCount': totalWordCount,
+                    'index': index,
+                }]
+            return render_template('result.html', posts = posts)
 
         if txt:  # 텍스트 하나만 받으면 여기로
             url = txt
@@ -166,10 +190,16 @@ def upload_file():
             
             index, elapsedTime, totalWordCount = webcrawl(url)
 
+            posts += [{
+                    'elapsedTime': elapsedTime,
+                    'totalWordCount': totalWordCount,
+                    'index': index,
+                }]
+            
             target_index.append(index)
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
-            return render_template('result.html', elapsedTime = elapsedTime, totalWordCount = totalWordCount, index=index)
+            return render_template('result.html', posts=posts)
 
 if __name__ == '__main__':
     # debug를 True로 세팅하면, 해당 서버 세팅 후에 코드가 바뀌어도 문제없이 실행됨. 
