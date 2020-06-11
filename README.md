@@ -22,3 +22,11 @@
 - tfidf 구현 완료
 - 대부분의 함수와 변수에 주석 달았음
 - tfidf 기반 top 10을 리턴할 수 있음
+- tfidf를 여러 개의 url input에 대해서도 가
+
+06/10/20 (조호성)
+---
+- main.html과 main_css.css의 prototype을 만듦.
+- main_css.css를 통해 main.html을 디자인함.
+- **전체 디자인에 대해 팀원들과 상의해보기**
+- url.html을 만들고, url.html에 쓰이는 class들을 main_css.css에 추가함.
