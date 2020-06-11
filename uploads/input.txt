@@ -1,3 +1,5 @@
-naver.com
-google.com
-asdfasdf
+http://airflow.apache.org/
+http://incubator.apache.org/
+http://juneau.apache.org/
+http://kafka.apache.org/
+https://sling.apache.org/

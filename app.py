@@ -8,6 +8,7 @@ import sys
 import numpy
 import math
 import string
+import time
 
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, redirect, url_for, request
@@ -23,6 +24,8 @@ port = '8000'
 es_port = "9200"   
 es = Elasticsearch([{'host':host, 'port':es_port}], timeout=30)
 swlist = []
+
+target_index = []
 
 def compute_idf(dictionary, sent_list):
     Dval = len(sent_list)
@@ -59,21 +62,20 @@ def analyze(tfidf, dictionary, sent_list):
             tfidf[word] = tfval * idf_d[word]
             
     res = sorted(tfidf.items(), key=(lambda x: x[1]), reverse=True)
-    top10 = dict(res[:10]) # top10을 뽑음
+    top10 = dict(res[:10])  # top10을 뽑음
     
     return top10
 
 
-def insertDoc(idx, url, dictionary): # ElasticSearch에 저장
-    i = 1
-    for word in dictionary:
-        doc = {
-            "url": url,
-            "words" : word,
-            "frequency": dictionary[word],
-        }
-        es.index(index=idx, doc_type="word", id=i, body=doc)
-        i += 1
+def insertDoc(idx, url, dictionary, docType): # ElasticSearch에 저장
+    words = list(dictionary.keys())
+    number = list(dictionary.values())
+    doc = {
+        "url": url,
+        "words": words,
+        "number": number,
+    }
+    es.index(index=idx, doc_type="word", id=docType, body=doc)
 
 # allWords: 총 단어가 저장되는 리스트
 # dictionary: 유의한 단어를 저장할 리스트
@@ -114,51 +116,60 @@ def webcrawl(url):
     dictionary = {} # 분석에 사용할 유의미한 글자
     html_body = [] # 크롤링할 내용이 저장될 리스트
     sent_list = [] # 크롤링한 내용의 문장들이 저장되는 리스트
-    tfidf = {} # tfidf 결과가 저장되는 딕셔너리
+    tfidf = {}  # tfidf 결과가 저장되는 딕셔너리
+    totalWordCount = 0
 
+    elapsedTime = 0
+
+    start = time.time()  # 시간 측정 시작
     html_body = html.select('body') # 웹 페이지 전부 크롤링
     findSentList(html_body, sent_list) # 크롤링한 데이터를 문장 단위로 추출
     findWords(allWords, dictionary, sent_list)  # 문장 단위로 추출한 데이터를 단어 단위로 추출
+    elapsedTime = time.time() - start  # 시간 측정끝
     # allWords는 전체 단어의 갯수, dictionary는 유의한 단어의 갯수
-
-    insertDoc(index, url, dictionary)
+    
+    totalWordCount = len(allWords)
 
     top10 = analyze(tfidf, dictionary, sent_list)
 
-    return top10
+    insertDoc(index, url, dictionary, 'all')
+    insertDoc(index, url, top10, 'top10')
+
+    return index, elapsedTime, totalWordCount
 
 @app.route('/')
 def render_file():
     return render_template('home.html')
+
+@app.route('/top10')
+def top10():
+    target_index
+    return 
 
 @app.route('/file_uploaded', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file1']
         txt = request.form['text1']
-        
+
         if f: # 파일로 받으면 여기로
             txt = f.read()
             urls = txt.splitlines()
-            top10 = ''
             for binUrl in urls:
                 url = binUrl.decode('utf-8')
-                part = webcrawl(url)
-                print(part)
-                i = 1
-                for topWords in part:
-                    top10 += str(i)
-                    top10 += " "
-                    top10 += topWords
-                    top10 += " "
-                    i += 1
-            return top10
+                index, elapsedTime, totalWordCount = webcrawl(url)
+            return render_template('result.html', elapsedTime = elapsedTime, totalWordCount = totalWordCount, index=index)
+
         if txt:  # 텍스트 하나만 받으면 여기로
-            dictionary = []
             url = txt
             url.replace("\n", "")
-            dictionary = webcrawl(url)
-            return dictionary
+            
+            index, elapsedTime, totalWordCount = webcrawl(url)
+
+            target_index.append(index)
+
+            # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
+            return render_template('result.html', elapsedTime = elapsedTime, totalWordCount = totalWordCount, index=index)
 
 if __name__ == '__main__':
     # debug를 True로 세팅하면, 해당 서버 세팅 후에 코드가 바뀌어도 문제없이 실행됨. 

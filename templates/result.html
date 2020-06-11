@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            padding: 30px;
+        }
+
+        strong {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Result</h1>
+    <h2>elapsedTime</h2>
+    <p>{{elapsedTime}}</p>
+    <h2>totalWordCount</h2>
+    <p>{{totalWordCount}}</p>
+    <h2>index</h2>
+    <p>{{index}}</p>
+    <form action="http://localhost:8000/top10" method="POST">
+        <input type="submit" value='Top 10' name="tfidf" />
+    </form>
+    <form action="http://localhost:8000/cossimil" method="POST">
+        <input type="submit" value='Similarity' name='cossimil'/>
+    </form>
+</body>
+
+</html>
