@@ -1,10 +1,15 @@
 <html>
+    <link rel="stylesheet" href="./main.css">
     <body>
+        <div>
+            <p class="URL_head">Analysis</p>
+          </div>
         <div>
             <form action="http://localhost:8000/file_uploaded" 
             method="POST" enctype="multipart/form-data">
-                <input type="text" name="text1"/>
-                <input type="submit" />
+                <input type="text" class="URL_txt" placeholder="input the URL" name="text1"/>
+                <br />
+                <input class="URL_btn" type="submit" value="submit"/>
             </form>
         </div>
     </body>
