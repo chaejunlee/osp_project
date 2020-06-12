@@ -11,7 +11,7 @@ import string
 import time
 
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from elasticsearch import Elasticsearch
 from werkzeug.utils import secure_filename
 from nltk import word_tokenize
@@ -291,7 +291,7 @@ def top10():
     return render_template('top10.html', posts=posts)
 
 
-@app.route('/file_uploaded', methods=['GET', 'POST'])
+@app.route('/analysis', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         try:
@@ -303,6 +303,11 @@ def upload_file():
         except:
             txt = None
 
+        if len(index_list):
+            index_list.clear()
+        if len(word_d):
+            word_d.clear()
+
         posts = []
         url_list = []
         if f:  # 파일로 받으면 여기로
@@ -311,7 +316,11 @@ def upload_file():
             for binUrl in urls:
                 url = binUrl.decode('utf-8')
                 if url not in url_list:
-                    index, elapsedTime, totalWordCount = webcrawl(url)
+                    try:
+                        index, elapsedTime, totalWordCount = webcrawl(url)
+                    except Exception:
+                        flash('Oops! Something wrong happened!')
+                        return render_template('main.html')
                     posts += [{
                         'elapsedTime': elapsedTime,
                         'totalWordCount': totalWordCount,
@@ -332,7 +341,11 @@ def upload_file():
         if txt:  # 텍스트 하나만 받으면 여기로
             url = txt
             url.replace("\n", "")
-            index, elapsedTime, totalWordCount = webcrawl(url)
+            try:
+                index, elapsedTime, totalWordCount = webcrawl(url)
+            except Exception:
+                flash('Oops! Something wrong happened!')
+                return render_template('main.html')
 
             posts += [{
                 'elapsedTime': elapsedTime,
