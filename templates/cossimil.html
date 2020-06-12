@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            padding: 30px;
+        }
+
+        strong {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Similar Websites</h1>
+
+    {% block content %}
+    <div>
+        <div>
+            {% for post in posts %}
+            <article>
+                <h2># {{ post.number }} {{ post.word }}</h2>
+            </article>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endblock %}
+</body>
+
+</html>
