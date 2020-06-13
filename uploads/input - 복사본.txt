@@ -1,5 +1,6 @@
 http://airflow.apache.org/
-http://incubator.apache.org/
+http://airflow.apache.org/
+http://incubatr.apache.org/
 http://cassandra.apache.org/
 http://iceberg.apache.org/
 https://sling.apache.org/
