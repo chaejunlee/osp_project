@@ -167,7 +167,7 @@ def webcrawl(url):
         res = requests.get(url, timeout=3000)
         html = BeautifulSoup(res.content, "html.parser")
     except:
-        index = "webcrawling failed"
+        index = "Webcrawling Failed"
         elapsedTime = -1
         totalWordCount = -1
         return index, elapsedTime, totalWordCount
@@ -209,8 +209,6 @@ def render_file():
 def cossimilweb():
     if request.method == 'POST':
         index = request.form['cossimil']
-
-    print(len(index_list))
 
     if (len(index_list) < 3):
         post = [{
