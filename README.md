@@ -48,3 +48,9 @@
 - 크롤링과 tfidf를 분리해냄. sent_list를 데이터 베이스에 저장하는 것으로 결정함. 처음 데이터베이스에 저장할 때는 시간 좀 걸리는 듯
 - 중복 및 크롤링 실패에 대한 처리 완료. 중복에는 "duplicated link"라고 출력하게 했음. 실패한 크롤링에는 "Webcrawling Failed"를 출력하게 했음.
 - css를 적용함. Flask에서 css 파일을 이용하기 위해서는 static 폴더 안에 넣어야 함. 따라서 모든 html에서의 css 경로는 "../static/main.css"여야함.
+
+06/16/20 (조호성)
+---
+- result.html, top10.html, similar.html prototype 만듦 (카테고리 만듦)
+- main.css에 result, top10, similar html에 쓰인 class 추가함
+- result.html에 success와 fail을 어떻게 띄울지 모르겠음.. result1,2로 html 두개 만드는지 아니면 그냥 클래스 두개 만드나..? 물어보기
