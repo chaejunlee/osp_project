@@ -54,3 +54,10 @@
 - result.html, top10.html, similar.html prototype 만듦 (카테고리 만듦)
 - main.css에 result, top10, similar html에 쓰인 class 추가함
 - result.html에 success와 fail을 어떻게 띄울지 모르겠음.. result1,2로 html 두개 만드는지 아니면 그냥 클래스 두개 만드나..? 물어보기
+
+06/16/20 (이채준)
+---
+- result.html에서 successful, fail을 구분하는 기능을 만듦
+- tfidf와 cossimil에서 분석에 걸린 시간을 추가했음
+- (요청사항) result.html에서 successful과 fail 구분할 수 있도록 구현
+- (요청사항) tfidf와 cossimil에서 분석에 걸린 시간을 출력할 수 있도록 구현
