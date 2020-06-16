@@ -170,7 +170,8 @@ def webcrawl(url):
         index = "Webcrawling Failed"
         elapsedTime = -1
         totalWordCount = -1
-        return index, elapsedTime, totalWordCount
+        successful = False
+        return index, elapsedTime, totalWordCount, successful
     link = url
     url = url.replace("http://", "")
     url = url.replace("https://", "")
@@ -196,8 +197,9 @@ def webcrawl(url):
     insertDoc(index, link, sent_list, 'sent_list')
 
     elapsedTime = time.time() - start  # 시간 측정끝
+    successful = True
 
-    return index, elapsedTime, totalWordCount
+    return index, elapsedTime, totalWordCount, successful
 
 
 @app.route('/')
@@ -209,6 +211,8 @@ def render_file():
 def cossimilweb():
     if request.method == 'POST':
         index = request.form['cossimil']
+
+    start = time.time()
 
     if (len(index_list) < 3):
         post = [{
@@ -259,11 +263,17 @@ def cossimilweb():
         }]
         i += 1
 
-    return render_template('cossimil.html', posts=posts)
+    end = time.time()
+
+    elapsedTime = end - start
+
+    return render_template('cossimil.html', elapsedTime = elapsedTime, posts=posts)
 
 
 @app.route('/top10', methods=['GET', 'POST'])
 def top10():
+    start = time.time()
+
     if request.method == 'POST':
         index = request.form['tfidf']
 
@@ -285,8 +295,12 @@ def top10():
             'word': word,
         }]
         i += 1
+    
+    end = time.time()
 
-    return render_template('top10.html', posts=posts)
+    elapsedTime = end - start
+
+    return render_template('top10.html', elapsedTime = elapsedTime ,posts=posts)
 
 
 @app.route('/analysis', methods=['GET', 'POST'])
@@ -315,7 +329,7 @@ def upload_file():
                 url = binUrl.decode('utf-8')
                 if url not in url_list:
                     try:
-                        index, elapsedTime, totalWordCount = webcrawl(url)
+                        index, elapsedTime, totalWordCount, successful = webcrawl(url)
                     except Exception:
                         flash('Oops! Something wrong happened!')
                         return render_template('main.html')
@@ -324,6 +338,7 @@ def upload_file():
                         'totalWordCount': totalWordCount,
                         'index': index,
                         'url': url,
+                        'successful': successful,
                     }]
                     url_list.append(url)
                 else:
@@ -332,6 +347,7 @@ def upload_file():
                         'totalWordCount': -1,
                         'index': "Duplicate Link",
                         'url': url,
+                        'successful': False,
                     }]
                     url_list.append(url)
             return render_template('result.html', posts=posts)
@@ -350,6 +366,7 @@ def upload_file():
                 'totalWordCount': totalWordCount,
                 'index': index,
                 'url': url,
+                'Successful': successful,
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
