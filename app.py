@@ -360,7 +360,7 @@ def upload_file():
                         'successful': False,
                     }]
                     url_list.append(url)
-            return render_template('result.html', posts=posts, port=port)
+            return render_template('result.html', posts=posts)
 
         if txt:  # 텍스트 하나만 받으면 여기로
             url = txt
@@ -380,7 +380,7 @@ def upload_file():
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
-            return render_template('result.html', posts=posts, port=port)
+            return render_template('result.html', posts=posts)
 
 
 if __name__ == '__main__':
