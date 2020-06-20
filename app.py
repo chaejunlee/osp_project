@@ -9,6 +9,7 @@ import numpy
 import math
 import string
 import time
+import itertools
 
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, redirect, url_for, request, flash
@@ -19,7 +20,7 @@ from nltk.corpus import stopwords
 
 app = Flask(__name__)
 
-host = '127.0.0.1'
+host = 'localhost'
 port = '8000'
 es_port = "9200"
 es = Elasticsearch([{'host': host, 'port': es_port}], timeout=30)
@@ -224,8 +225,9 @@ def cossimilweb():
     sent_list = []
     posts = []
     top = {}
-    top3 = []
+    top3 = {}
     url = ''
+    index_url = ''
 
     result = es.search(index=index, body={
                        'query': {'match': {'type': 'sent_list'}}})
@@ -250,16 +252,22 @@ def cossimilweb():
             cossimil = dotpro / (numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
 
             top[url] = cossimil
+        else:
+            result = es.search(
+                index=idx, body={'query': {'match': {'type': 'sent_list'}}})
 
-    top = {k: v for k, v in sorted(top.items(), key=lambda item: item[1])}
-    top3 = top[:3]
+            for data in result['hits']['hits']:
+                index_url = (data['_source'].get('url'))
+
+    top = {k: v for k, v in sorted(top.items(), key=lambda item: item[1], reverse=True)}
+    top3 = dict(itertools.islice(top.items(), 3))
 
     i = 1
-    for word, frequency in top3:
+    for word, score in top3.items():
         posts += [{
             'number': i,
             'word': word,
-            'frequency': frequency,
+            'score': score,
         }]
         i += 1
 
@@ -267,41 +275,42 @@ def cossimilweb():
 
     elapsedTime = end - start
 
-    return render_template('cossimil.html', elapsedTime = elapsedTime, posts=posts)
+    return render_template('cossimil.html', index = index, url = index_url, elapsedTime = elapsedTime, posts=posts)
 
 
 @app.route('/top10', methods=['GET', 'POST'])
 def top10():
-    start = time.time()
-
     if request.method == 'POST':
+        start = time.time()
         index = request.form['tfidf']
 
-    result = es.search(index=index, body={
-                       'query': {'match': {'type': 'sent_list'}}})
+        result = es.search(index=index, body={
+                        'query': {'match': {'type': 'sent_list'}}})
 
-    sent_list = []
-    posts = []
+        sent_list = []
+        posts = []
+        url = ''
 
-    for data in result['hits']['hits']:
-        sent_list = (data['_source'].get('words'))
+        for data in result['hits']['hits']:
+            sent_list = (data['_source'].get('words'))
+            url = (data['_source'].get('url'))
 
-    top, dictionary = top10Analyze(sent_list)
+        top, dictionary = top10Analyze(sent_list)
 
-    i = 1
-    for word in top:
-        posts += [{
-            'number': i,
-            'word': word,
-            'frequency': dictionary[word],
-        }]
-        i += 1
-    
-    end = time.time()
+        i = 1
+        for word in top:
+            posts += [{
+                'number': i,
+                'word': word,
+                'frequency': dictionary[word],
+            }]
+            i += 1
+        
+        end = time.time()
 
-    elapsedTime = end - start
+        elapsedTime = end - start
 
-    return render_template('top10.html', elapsedTime = elapsedTime ,posts=posts)
+        return render_template('top10.html', url = url, index = index, elapsedTime = elapsedTime, posts=posts)
 
 
 @app.route('/analysis', methods=['GET', 'POST'])
@@ -351,7 +360,7 @@ def upload_file():
                         'successful': False,
                     }]
                     url_list.append(url)
-            return render_template('result.html', posts=posts)
+            return render_template('result.html', posts=posts, port=port)
 
         if txt:  # 텍스트 하나만 받으면 여기로
             url = txt
@@ -371,7 +380,7 @@ def upload_file():
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
-            return render_template('result.html', posts=posts)
+            return render_template('result.html', posts=posts, port=port)
 
 
 if __name__ == '__main__':
