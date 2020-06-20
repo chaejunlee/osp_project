@@ -88,7 +88,7 @@ def top10Analyze(sent_list):
     res = sorted(tfidf.items(), key=(lambda x: x[1]), reverse=True)
     top10 = dict(res[:10])  # top10을 뽑음
 
-    return top10
+    return top10, dictionary
 
 
 def insertDoc(idx, url, dictionary, docType):  # ElasticSearch에 저장
@@ -252,14 +252,14 @@ def cossimilweb():
             top[url] = cossimil
 
     top = {k: v for k, v in sorted(top.items(), key=lambda item: item[1])}
-    top3 = list(top.keys())
-    top3 = top3[:3]
+    top3 = top[:3]
 
     i = 1
-    for word in top3:
+    for word, frequency in top3:
         posts += [{
             'number': i,
             'word': word,
+            'frequency': frequency,
         }]
         i += 1
 
@@ -286,13 +286,14 @@ def top10():
     for data in result['hits']['hits']:
         sent_list = (data['_source'].get('words'))
 
-    top = top10Analyze(sent_list)
+    top, dictionary = top10Analyze(sent_list)
 
     i = 1
     for word in top:
         posts += [{
             'number': i,
             'word': word,
+            'frequency': dictionary[word],
         }]
         i += 1
     
@@ -356,7 +357,7 @@ def upload_file():
             url = txt
             url.replace("\n", "")
             try:
-                index, elapsedTime, totalWordCount = webcrawl(url)
+                index, elapsedTime, totalWordCount, successful = webcrawl(url)
             except Exception:
                 flash('Oops! Something wrong happened!')
                 return render_template('main.html')
@@ -366,7 +367,7 @@ def upload_file():
                 'totalWordCount': totalWordCount,
                 'index': index,
                 'url': url,
-                'Successful': successful,
+                'successful': successful,
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
