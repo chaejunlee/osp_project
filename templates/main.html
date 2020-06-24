@@ -5,6 +5,13 @@
 </head>
 
 <body style="margin-left: 200px;margin-right: 200px;">
+  <div>
+    {% block content %}
+    <div>
+        <h2>{{error}}</h2>
+    </div>
+    {% endblock %}
+  </div>
   <div class="btn_box">
     <a class="button" href="{{ url_for('static', filename='url.html') }}">URL INPUT</a>
     <a class="button" href="{{ url_for('static', filename='text.html') }}">TEXT INPUT</a>

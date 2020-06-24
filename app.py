@@ -30,29 +30,139 @@ index_list = []
 
 word_d = {}
 
+@app.route('/top10', methods=['GET', 'POST'])
+def top10():
+    if request.method == 'POST':
+        start = time.time()
+        index = request.form['tfidf']
 
-def compute_idf(dictionary, sent_list):
-    Dval = len(sent_list)
+        result = es.search(index=index, body={
+                        'query': {'match': {'type': 'sent_list'}}})
 
+        sent_list = []
+        posts = []
+        url = ''
+        word_d = {}
+
+        for data in result['hits']['hits']:
+            sent_list = (data['_source'].get('words'))
+            url = (data['_source'].get('url'))
+
+        result = es.search(index='all', body={
+                       'query': {'match': {'type': 'word_d'}}})
+
+        for data in result['hits']['hits']:
+            word_d = (data['_source'].get('dict'))
+
+        # print(word_d)
+
+        # print(sent_list)
+
+        top, dictionary = top10Analyze(sent_list, word_d)
+
+        i = 1
+        for word in top:
+            posts += [{
+                'number': i,
+                'word': word,
+                'frequency': dictionary[word],
+            }]
+            i += 1
+        
+        end = time.time()
+
+        elapsedTime = end - start
+
+        #insertDoc(index, url, posts, "top10")
+        #insertDoc(index, url, elapsedTime, "top10ElapsedTime")
+
+        return render_template('top10.html', url = url, index = index, elapsedTime = elapsedTime, posts=posts)
+
+
+def compute_idf(word_d):
+    sent_list = {}
     idf_d = {}
-    for t in dictionary:
-        cnt = 0
-        for s in sent_list:
-            if t in word_tokenize(s):  # 문장을 자르는 방법은 word_tokenize()
-                cnt += 1
-            if cnt:
-                idf_d[t] = math.log(Dval / cnt)
+
+    # print('computing idf')
+    result = es.search(index="all", body={'query': {'match': {'type': 'index_list'}}})
+    for data in result['hits']['hits']:
+        index_list = (data['_source'].get('words'))
+
+    # print(word_d)
+    
+    Dval = len(index_list)
+    # print(Dval)
+
+    for t in word_d.keys():
+        # print(t)
+        count = 0
+        sent_list.clear()
+        for index in index_list:
+            # print(index)
+            result = es.search(index=index, body={'query': {'match': {'type': 'allWords'}}})
+            for data in result['hits']['hits']:
+                sent_list = (data['_source'].get('dict'))
+            # print('sent_list')
+            # print(sent_list)
+            for s in sent_list.keys():
+                if (t == s):
+                    count += 1
+                    idf_d[t] = math.log(Dval / count)
+                    #print(idf_d[t])
+                    # if (t == 'airflow' and s == 'airflow'):
+                    #     print('idf_d[airflow]')
+                    #     print(idf_d[t])
+                    #     print('Dval', Dval)
+                    #     print('count', count)
+                    #     print(Dval/count)
+    # print('idf_d')
+    # print(idf_d['airflow'])
 
     return idf_d
 
 
-def compute_tf(dictionary, s):
+def compute_tf(dictionary, word_d):
     tf_d = {}
 
     for word, count in dictionary.items():
-        tf_d[word] = float(count) / float(len(dictionary))
+        tf_d[word] = float(count) / float(len(word_d))
 
     return tf_d
+
+def top10Analyze(sent_list, word_d):
+    dictionary = {}
+    tfidf = {}
+
+
+    dictionary = findDict(list(sent_list))
+    # print(dictionary)
+    # print(len(dictionary))
+    # print(word_d)
+    # print(len(word_d))
+
+    result = es.search(index="all", body={'query': {'match': {'type': 'word_d'}}})
+    for data in result['hits']['hits']:
+        word_d = (data['_source'].get('dict'))
+
+    idf_d = compute_idf(word_d)
+    # print("idf_d")
+    # print(idf_d)
+    # print(len(idf_d))
+
+    tf_d = compute_tf(dictionary, word_d)
+    # print("tf_d")
+    # print(tf_d)
+    # print(len(tf_d))
+    for word, tfval in tf_d.items():
+        tfidf[word] = tfval * idf_d[word]
+
+    res = sorted(tfidf.items(), key=(lambda x: x[1]), reverse=True)
+    # print(res)
+    top10 = dict(res[:10])  # top10을 뽑음
+
+    # print(top10)
+
+    return top10, dictionary
 
 
 def findDict(sent_list):
@@ -61,6 +171,7 @@ def findDict(sent_list):
         textSlice = word_tokenize(sentence)
         for word in textSlice:
             if word:
+                word = word.lower()
                 if word not in swlist:
                     try:
                         dictionary[word] += 1
@@ -68,39 +179,13 @@ def findDict(sent_list):
                         dictionary[word] = 1
     return dictionary
 
-# tfidf: 값이 저장 되는 곳
-# dictionary: 유의미한 단어의 딕셔너리
-# sent_list: 유의미한 문장의 리스트
-
-
-def top10Analyze(sent_list):
-    dictionary = {}
-    tfidf = {}
-
-    dictionary = findDict(sent_list)
-
-    idf_d = compute_idf(dictionary, sent_list)
-
-    for i in range(0, len(sent_list)):
-        tf_d = compute_tf(dictionary, sent_list[i])
-        for word, tfval in tf_d.items():
-            tfidf[word] = tfval * idf_d[word]
-
-    res = sorted(tfidf.items(), key=(lambda x: x[1]), reverse=True)
-    top10 = dict(res[:10])  # top10을 뽑음
-
-    return top10, dictionary
-
 
 def insertDoc(idx, url, dictionary, docType):  # ElasticSearch에 저장
     doc = {}
     if type(dictionary) is dict:
-        words = list(dictionary.keys())
-        numbers = list(dictionary.values())
         doc = {
             "url": url,
-            "words": words,
-            "numbers": numbers,
+            "dict": dictionary,
             "type": docType,
         }
         es.index(index=idx, id=docType, body=doc)
@@ -123,6 +208,7 @@ def findWords(allWords, sent_list):
         textSlice = word_tokenize(sentence)
         for word in textSlice:
             if word:
+                word = word.lower()
                 totalWordCount += 1
                 try:
                     allWords[word] += 1
@@ -141,6 +227,8 @@ def findWords(allWords, sent_list):
 def findSentList(html_body, sent_list):
     for sentence in html_body:
         body = sentence.text
+        cleanr = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+        body = re.sub(cleanr, '', body)
         sending_list = body.splitlines()
         for word in sending_list:
             if word:
@@ -149,8 +237,7 @@ def findSentList(html_body, sent_list):
                 if cleanWord:
                     sent_list.append(cleanWord)
 
-
-def make_vector(sent_list):
+def make_vector(sent_list, word_d):
     v = []
     dictionary = findDict(sent_list)
     tokenized = list(dictionary.keys())
@@ -161,7 +248,6 @@ def make_vector(sent_list):
                 val += 1
         v.append(val)
     return v
-
 
 def webcrawl(url):
     try:
@@ -196,8 +282,13 @@ def webcrawl(url):
     # allWords는 전체 단어의 갯수, dictionary는 유의한 단어의 갯수
 
     insertDoc(index, link, sent_list, 'sent_list')
-
+    insertDoc(index, link, allWords, 'allWords')
+    
     elapsedTime = time.time() - start  # 시간 측정끝
+
+    insertDoc(index, link, elapsedTime, "elapsedTime")
+    insertDoc(index, link, totalWordCount, "totalWordCount")
+
     successful = True
 
     return index, elapsedTime, totalWordCount, successful
@@ -215,6 +306,10 @@ def cossimilweb():
 
     start = time.time()
 
+    result = es.search(index="all", body={'query': {'match': {'type': 'index_list'}}})
+    for data in result['hits']['hits']:
+        index_list = (data['_source'].get('words'))
+
     if (len(index_list) < 3):
         post = [{
             'number': -1,
@@ -228,6 +323,7 @@ def cossimilweb():
     top3 = {}
     url = ''
     index_url = ''
+    word_d = {}
 
     result = es.search(index=index, body={
                        'query': {'match': {'type': 'sent_list'}}})
@@ -235,7 +331,15 @@ def cossimilweb():
     for data in result['hits']['hits']:
         original_list = (data['_source'].get('words'))
 
-    v1 = make_vector(original_list)
+    # print('original_list')
+    # print(original_list)
+    result = es.search(index='all', body={
+                       'query': {'match': {'type': 'word_d'}}})
+
+    for data in result['hits']['hits']:
+        word_d = (data['_source'].get('dict'))
+
+    v1 = make_vector(original_list, word_d)
 
     for idx in index_list:
         if idx != index:
@@ -246,7 +350,7 @@ def cossimilweb():
                 sent_list = (data['_source'].get('words'))
                 url = (data['_source'].get('url'))
 
-            v2 = make_vector(sent_list)
+            v2 = make_vector(sent_list, word_d)
 
             dotpro = numpy.dot(v1, v2)
             cossimil = dotpro / (numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
@@ -275,43 +379,10 @@ def cossimilweb():
 
     elapsedTime = end - start
 
+    #insertDoc(index, url, posts, "cossimil")
+    #insertDoc(index, url, elapsedTime, "cossimilElapsedTime")
+
     return render_template('cossimil.html', index = index, url = index_url, elapsedTime = elapsedTime, posts=posts)
-
-
-@app.route('/top10', methods=['GET', 'POST'])
-def top10():
-    if request.method == 'POST':
-        start = time.time()
-        index = request.form['tfidf']
-
-        result = es.search(index=index, body={
-                        'query': {'match': {'type': 'sent_list'}}})
-
-        sent_list = []
-        posts = []
-        url = ''
-
-        for data in result['hits']['hits']:
-            sent_list = (data['_source'].get('words'))
-            url = (data['_source'].get('url'))
-
-        top, dictionary = top10Analyze(sent_list)
-
-        i = 1
-        for word in top:
-            posts += [{
-                'number': i,
-                'word': word,
-                'frequency': dictionary[word],
-            }]
-            i += 1
-        
-        end = time.time()
-
-        elapsedTime = end - start
-
-        return render_template('top10.html', url = url, index = index, elapsedTime = elapsedTime, posts=posts)
-
 
 @app.route('/analysis', methods=['GET', 'POST'])
 def upload_file():
@@ -341,8 +412,8 @@ def upload_file():
                     try:
                         index, elapsedTime, totalWordCount, successful = webcrawl(url)
                     except Exception:
-                        flash('Oops! Something wrong happened!')
-                        return render_template('main.html')
+                        # flash('Oops! Something wrong happened!')
+                        return render_template('main.html', error="error")
                     posts += [{
                         'elapsedTime': elapsedTime,
                         'totalWordCount': totalWordCount,
@@ -360,16 +431,25 @@ def upload_file():
                         'successful': False,
                     }]
                     url_list.append(url)
-            return render_template('result.html', posts=posts)
+
+            insertDoc("all", "all", index_list, 'index_list')            
+            insertDoc("all", "all", word_d, 'word_d')
+            if (len(url_list) < 3):
+                url_len = False
+            else:
+                url_len = True
+            return render_template('result.html', posts=posts, url_len=url_len)
 
         if txt:  # 텍스트 하나만 받으면 여기로
             url = txt
             url.replace("\n", "")
             try:
                 index, elapsedTime, totalWordCount, successful = webcrawl(url)
-            except Exception:
-                flash('Oops! Something wrong happened!')
-                return render_template('main.html')
+            except Exception as e:
+                print(e)
+                print("error")
+                #flash('Oops! Something wrong happened!')
+                return render_template('main.html', error="error")
 
             posts += [{
                 'elapsedTime': elapsedTime,
@@ -380,7 +460,16 @@ def upload_file():
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
-            return render_template('result.html', posts=posts)
+            insertDoc("all", "all", word_d, 'word_d')
+            insertDoc("all", "all", index_list, 'index_list')
+
+            if (len(url_list) < 3):
+                url_len = False
+            else:
+                url_len = True
+            return render_template('result.html', posts=posts, url_len=url_len)
+        
+        return render_template('main.html', error="error")
 
 
 if __name__ == '__main__':
