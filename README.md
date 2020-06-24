@@ -48,3 +48,22 @@
 - 크롤링과 tfidf를 분리해냄. sent_list를 데이터 베이스에 저장하는 것으로 결정함. 처음 데이터베이스에 저장할 때는 시간 좀 걸리는 듯
 - 중복 및 크롤링 실패에 대한 처리 완료. 중복에는 "duplicated link"라고 출력하게 했음. 실패한 크롤링에는 "Webcrawling Failed"를 출력하게 했음.
 - css를 적용함. Flask에서 css 파일을 이용하기 위해서는 static 폴더 안에 넣어야 함. 따라서 모든 html에서의 css 경로는 "../static/main.css"여야함.
+
+06/16/20 (조호성)
+---
+- result.html, top10.html, similar.html prototype 만듦 (카테고리 만듦)
+- main.css에 result, top10, similar html에 쓰인 class 추가함
+- result.html에 success와 fail을 어떻게 띄울지 모르겠음.. result1,2로 html 두개 만드는지 아니면 그냥 클래스 두개 만드나..? 물어보기
+
+06/16/20 (이채준)
+---
+- result.html에서 successful, fail을 구분하는 기능을 만듦
+- tfidf와 cossimil에서 분석에 걸린 시간을 추가했음
+- (요청사항) result.html에서 successful과 fail 구분할 수 있도록 구현
+- (요청사항) tfidf와 cossimil에서 분석에 걸린 시간을 출력할 수 있도록 구현
+
+06/20/20 (이채준)
+---
+- 돌리다 보니 port를 8000으로 설정해줬음에도 불구하고 브라우저에서는 11932 등의 엉뚱한 포트로 접속하는 것을 발견함.
+- 우리 html들은 직접적으로 주소를 정해주는 방식이기 때문에 port 번호가 조금이라도 바뀌면 서비스가 돌아가질 않음,,
+- 컴퓨터 껐다 키니까 나아졌긴한데,, 혹시라도 문제가 또 생기면 port를 기본 port인 5000으로 설정해야될 것 같음.

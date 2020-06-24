@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <h1>Similar Websites</h1>
+    <h1>Similar Websites {{ index }} ({{ url }})</h1>
 
     {% block content %}
     <div>
@@ -24,6 +24,7 @@
             {% for post in posts %}
             <article>
                 <h2># {{ post.number }} {{ post.word }}</h2>
+                <p>{{ post.score }}</p>
             </article>
 
             {% endfor %}
@@ -31,6 +32,11 @@
 
     </div>
     {% endblock %}
+
+    <div>
+        <h2>Elapsed Time</h2>
+        <p>{{ elapsedTime }}</p>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,51 @@
+<html>
+<link rel="stylesheet" href="./main.css" />
+
+<body>
+  <section>
+    <h2 class="RESULT_head">TOP10</h2>
+
+    <nav class="menu menu--prospero">
+      <hr />
+      <ul class="menu__list">
+        <li class="menu__item">
+          <a class="menu__link" href="#" onclick="location.href = 'result.html'">Result</a>
+        </li>
+        <li class="menu__item menu__item--current">
+          <a class="menu__link" href="#" onclick="location.href = 'top10.html'">TOP10</a>
+        </li>
+        <li class="menu__item">
+          <a class="menu__link" href="#" onclick="location.href = 'similar.html'">Similar</a>
+        </li>
+
+      </ul>
+      <hr />
+    </nav>
+  </section>
+
+  <!--{% block content %}-->
+
+  <!--{% for post in posts %}-->
+  <div class="list">
+    <div class="list_num">
+      1
+    </div>
+    <div class="list_word">
+      <div>word</div>
+      <div>score<br>count</div>
+    </div>
+  </div>
+
+  <!--{% endfor %}-->
+
+  <!--{% endblock %}-->
+
+  <!--
+  <div>
+      <h2>Elapsed Time</h2>
+      <p>{{ elapsedTime }}</p>
+  </div>
+-->
+</body>
+
+</html>

@@ -9,6 +9,7 @@ import numpy
 import math
 import string
 import time
+import itertools
 
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, redirect, url_for, request, flash
@@ -19,7 +20,7 @@ from nltk.corpus import stopwords
 
 app = Flask(__name__)
 
-host = '127.0.0.1'
+host = 'localhost'
 port = '8000'
 es_port = "9200"
 es = Elasticsearch([{'host': host, 'port': es_port}], timeout=30)
@@ -88,7 +89,7 @@ def top10Analyze(sent_list):
     res = sorted(tfidf.items(), key=(lambda x: x[1]), reverse=True)
     top10 = dict(res[:10])  # top10을 뽑음
 
-    return top10
+    return top10, dictionary
 
 
 def insertDoc(idx, url, dictionary, docType):  # ElasticSearch에 저장
@@ -170,7 +171,8 @@ def webcrawl(url):
         index = "Webcrawling Failed"
         elapsedTime = -1
         totalWordCount = -1
-        return index, elapsedTime, totalWordCount
+        successful = False
+        return index, elapsedTime, totalWordCount, successful
     link = url
     url = url.replace("http://", "")
     url = url.replace("https://", "")
@@ -196,8 +198,9 @@ def webcrawl(url):
     insertDoc(index, link, sent_list, 'sent_list')
 
     elapsedTime = time.time() - start  # 시간 측정끝
+    successful = True
 
-    return index, elapsedTime, totalWordCount
+    return index, elapsedTime, totalWordCount, successful
 
 
 @app.route('/')
@@ -210,6 +213,8 @@ def cossimilweb():
     if request.method == 'POST':
         index = request.form['cossimil']
 
+    start = time.time()
+
     if (len(index_list) < 3):
         post = [{
             'number': -1,
@@ -220,8 +225,9 @@ def cossimilweb():
     sent_list = []
     posts = []
     top = {}
-    top3 = []
+    top3 = {}
     url = ''
+    index_url = ''
 
     result = es.search(index=index, body={
                        'query': {'match': {'type': 'sent_list'}}})
@@ -246,47 +252,65 @@ def cossimilweb():
             cossimil = dotpro / (numpy.linalg.norm(v1) * numpy.linalg.norm(v2))
 
             top[url] = cossimil
+        else:
+            result = es.search(
+                index=idx, body={'query': {'match': {'type': 'sent_list'}}})
 
-    top = {k: v for k, v in sorted(top.items(), key=lambda item: item[1])}
-    top3 = list(top.keys())
-    top3 = top3[:3]
+            for data in result['hits']['hits']:
+                index_url = (data['_source'].get('url'))
+
+    top = {k: v for k, v in sorted(top.items(), key=lambda item: item[1], reverse=True)}
+    top3 = dict(itertools.islice(top.items(), 3))
 
     i = 1
-    for word in top3:
+    for word, score in top3.items():
         posts += [{
             'number': i,
             'word': word,
+            'score': score,
         }]
         i += 1
 
-    return render_template('cossimil.html', posts=posts)
+    end = time.time()
+
+    elapsedTime = end - start
+
+    return render_template('cossimil.html', index = index, url = index_url, elapsedTime = elapsedTime, posts=posts)
 
 
 @app.route('/top10', methods=['GET', 'POST'])
 def top10():
     if request.method == 'POST':
+        start = time.time()
         index = request.form['tfidf']
 
-    result = es.search(index=index, body={
-                       'query': {'match': {'type': 'sent_list'}}})
+        result = es.search(index=index, body={
+                        'query': {'match': {'type': 'sent_list'}}})
 
-    sent_list = []
-    posts = []
+        sent_list = []
+        posts = []
+        url = ''
 
-    for data in result['hits']['hits']:
-        sent_list = (data['_source'].get('words'))
+        for data in result['hits']['hits']:
+            sent_list = (data['_source'].get('words'))
+            url = (data['_source'].get('url'))
 
-    top = top10Analyze(sent_list)
+        top, dictionary = top10Analyze(sent_list)
 
-    i = 1
-    for word in top:
-        posts += [{
-            'number': i,
-            'word': word,
-        }]
-        i += 1
+        i = 1
+        for word in top:
+            posts += [{
+                'number': i,
+                'word': word,
+                'frequency': dictionary[word],
+            }]
+            i += 1
+        
+        end = time.time()
 
-    return render_template('top10.html', posts=posts)
+        elapsedTime = end - start
+
+        return render_template('top10.html', url = url, index = index, elapsedTime = elapsedTime, posts=posts)
 
 
 @app.route('/analysis', methods=['GET', 'POST'])
@@ -315,7 +339,7 @@ def upload_file():
                 url = binUrl.decode('utf-8')
                 if url not in url_list:
                     try:
-                        index, elapsedTime, totalWordCount = webcrawl(url)
+                        index, elapsedTime, totalWordCount, successful = webcrawl(url)
                     except Exception:
                         flash('Oops! Something wrong happened!')
                         return render_template('main.html')
@@ -324,6 +348,7 @@ def upload_file():
                         'totalWordCount': totalWordCount,
                         'index': index,
                         'url': url,
+                        'successful': successful,
                     }]
                     url_list.append(url)
                 else:
@@ -332,6 +357,7 @@ def upload_file():
                         'totalWordCount': -1,
                         'index': "Duplicate Link",
                         'url': url,
+                        'successful': False,
                     }]
                     url_list.append(url)
             return render_template('result.html', posts=posts)
@@ -340,7 +366,7 @@ def upload_file():
             url = txt
             url.replace("\n", "")
             try:
-                index, elapsedTime, totalWordCount = webcrawl(url)
+                index, elapsedTime, totalWordCount, successful = webcrawl(url)
             except Exception:
                 flash('Oops! Something wrong happened!')
                 return render_template('main.html')
@@ -350,6 +376,7 @@ def upload_file():
                 'totalWordCount': totalWordCount,
                 'index': index,
                 'url': url,
+                'successful': successful,
             }]
 
             # 리턴하는 값들: 처리시간(elapsedTime), 전체 단어수(totalWordCount), 쿼리 접근을 위한 인덱스(index)
