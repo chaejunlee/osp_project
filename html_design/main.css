@@ -12,6 +12,26 @@ body {
   margin-bottom: 10px;
 }
 
+.RESULT_success{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #53f5a7;
+  width: 1000px;
+  height: 450px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
+.RESULT_fail{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #53f5a7;
+  width: 1000px;
+  height: 450px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
 .menu {
 	line-height: 1px;
 	margin:  0 auto 3em;
