@@ -1,94 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+  <link rel="stylesheet" href="./main.css" />
+  <meta charset="utf-8" />
 
-<head>
-    <meta charset="UTF-8">
-    <title>Result</title>
-    <style>
-        body {
-            padding: 30px;
-        }
+  <body>
+    <section>
+	     <h2 class="RESULT_head">Result</h2>
 
-        strong {
-            color: darkblue;
-        }
-    </style>
-</head>
+	     <nav class="menu menu--prospero">
+         <hr />
+		       <ul class="menu__list">
+			          <li class="menu__item menu__item--current">
+				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'result.html'">Result</a>
+			          </li>
+			          <li class="menu__item">
+				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'top10.html'">TOP10</a>
+			          </li>
+			          <li class="menu__item">
+				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'similar.html'">Similar</a>
+			          </li>
+		      </ul>
+        <hr />
+	     </nav>
+     </section>
 
-<body>
-    <h1>Result</h1>
+     <div class="RESULT_success">
 
-    {% block content %}
-    <div>
-        <div>
-            {% for post in posts %}
-            {% if post.successful == True %}
-            <div>
-                <h2>elapsedTime</h2>
-                <p>{{ "%.2f"|format(post.elapsedTime) }} sec</p>
-                <h2>totalWordCount</h2>
-                <p>{{ post.totalWordCount }}</p>
-                <h2>index</h2>
-                <p>{{ post.index }}</p>
-                <h2>url</h2>
-                <a href="{{ post.url }}" target='_blank'>{{ post.url }}</a>
-            </div>
+     </div>
 
-                {% if url_len == True %}
 
-                    <form target="_blank" action="http://localhost:8000/top10" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                        <input type="submit" value="Top 10" />
-                    </form>
-                    <form target="_blank" action="http://localhost:8000/cossimil" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                        <input type="submit" value='Similarity' />
-                    </form>
-                
-                {% endif %}
-
-                {% if url_len == False %}
-
-                    <form action="http://localhost:8000/top10" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                        <input disabled="disabled" type="submit" value="Top 10" />
-                    </form>
-                    <form action="http://localhost:8000/cossimil" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                        <input disabled="disabled" type="submit" value='Similarity' />
-                    </form>
-                
-                {% endif %}
-
-            {% endif %}
-
-            {% if post.successful == False %}
-            <div>
-                <h2>elapsedTime</h2>
-                <p style="color: red">{{ "%.2f"|format(post.elapsedTime) }} second</p>
-                <h2>totalWordCount</h2>
-                <p style="color: red">{{ post.totalWordCount }}</p>
-                <h2>index</h2>
-                <p style="color: red">{{ post.index }}</p>
-                <h2>url</h2>
-                <a style="color: red">{{ post.url }}</a>
-            </div>
-
-            <form action="http://localhost:8000/top10" method="POST">
-                <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                <input disabled="disabled" type="submit" value="Top 10" />
-            </form>
-            <form action="http://localhost:8000/cossimil" method="POST">
-                <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                <input disabled="disabled" type="submit" value='Similarity' />
-            </form>
-            {% endif %}
-
-            {% endfor %}
-        </div>
-
-    </div>
-    {% endblock %}
-</body>
-
+  </body>
 </html>

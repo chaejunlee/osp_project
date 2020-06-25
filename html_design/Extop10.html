@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="./main.css" />
+
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            padding: 30px;
+        }
+
+        strong {
+            color: darkblue;
+        }
+    </style>
+</head>
+
+<body class="body">
+    <h1>Top 10: {{ index }} ({{ url }})</h1>
+
+    <!--{% block content %}-->
+    <div>
+        <!--{% for post in posts %}-->
+        <div class="list">
+            <div class="list_num">
+                1
+            </div>
+            <div class="list_word">
+                word 1234
+            </div>
+        </div>
+
+        <!--{% endfor %}-->
+
+    </div>
+    <!--{% endblock %}-->
+
+    <div>
+        <h2>Elapsed Time</h2>
+        <p>{{ elapsedTime }}</p>
+    </div>
+</body>
+
+</html>

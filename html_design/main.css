@@ -12,6 +12,26 @@ body {
   margin-bottom: 10px;
 }
 
+.RESULT_success{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #53f5a7;
+  width: 1000px;
+  height: 450px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
+.RESULT_fail{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #53f5a7;
+  width: 1000px;
+  height: 450px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
 .menu {
 	line-height: 1px;
 	margin:  0 auto 3em;
@@ -213,4 +233,37 @@ body {
 	background-color: #fff;
 	border-color: #abc0ff;
 	color: #abc0ff;
+}
+
+
+.list {
+	height:100px;
+	width:1000px;
+	border: 5px solid #313b53;
+	display:inline-block;
+}
+.list_num{
+	text-align: center;
+	vertical-align:middle ;
+	font-size:20px;
+	color:#ffffff;
+	height:100px;
+	line-height: 100px;
+	width:100px;
+	border:1px solid #313b53;
+	margin:0px;
+
+}
+
+.list_word {
+	text-align: center;
+	font-size:20px;
+	color:white;
+	height:100px;
+	line-height: 50px;
+	width:300px;
+	border:1px solid #313b53;
+	float:right;
+	margin:0px;
+	
 }
