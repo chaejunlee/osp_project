@@ -16,15 +16,15 @@
 </head>
 
 <body>
-    <h1>Top 10: {{ index }} ({{ url }})</h1>
+    <h1>Top 10: {{ index }} (<a href="{{ url }}" target="_blank">{{ url }}</a>)</h1>
 
     {% block content %}
     <div>
         <div>
             {% for post in posts %}
             <article>
-                <h2># {{ post.number }} {{ post.word }}</h2>
-                <p>{{ post.frequency }}</p>
+                <h2>#{{ post.number }} {{ post.word }}</h2>
+                <p>Word Frequnecy: {{ post.frequency }} Score: {{ "%.4f"|format(post.score) }}</p>
             </article>
 
             {% endfor %}
@@ -35,7 +35,7 @@
 
     <div>
         <h2>Elapsed Time</h2>
-        <p>{{ elapsedTime }}</p>
+        <p>{{ "%.2f"|format(elapsedTime)}} sec</p>
     </div>
 </body>
 
