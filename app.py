@@ -43,11 +43,13 @@ def top10():
         posts = []
         url = ''
         word_d = {}
+        dictionary = {}
 
         for data in result['hits']['hits']:
             sent_list = (data['_source'].get('words'))
             url = (data['_source'].get('url'))
 
+        dictionary, word_d = findWords()
         result = es.search(index='all', body={
                        'query': {'match': {'type': 'word_d'}}})
 
@@ -133,16 +135,11 @@ def top10Analyze(sent_list, word_d):
     dictionary = {}
     tfidf = {}
 
-
     dictionary = findDict(list(sent_list))
     # print(dictionary)
     # print(len(dictionary))
     # print(word_d)
     # print(len(word_d))
-
-    result = es.search(index="all", body={'query': {'match': {'type': 'word_d'}}})
-    for data in result['hits']['hits']:
-        word_d = (data['_source'].get('dict'))
 
     idf_d = compute_idf(word_d)
     # print("idf_d")
@@ -218,7 +215,7 @@ def findWords(allWords, sent_list):
                 if word not in word_d.keys():
                     word_d[word] = 0
                 word_d[word] += 1
-    return totalWordCount
+    return totalWordCount, word_d
 
 # html_body: rough하게 크롤링한 데이터가 저장되어 있는 string
 # sent_list: html_body로부터 유의미한(문장부호등이 없는) 문장이 저장될 리스트
@@ -276,6 +273,7 @@ def webcrawl(url):
 
     start = time.time()  # 시간 측정 시작
     html_body += html.select('body')  # 웹 페이지 전부 크롤링
+    #print(html_body)
     findSentList(html_body, sent_list)  # 크롤링한 데이터를 문장 단위로 추출
     # 문장 단위로 추출한 데이터를 단어 단위로 추출
     totalWordCount = findWords(allWords, sent_list)

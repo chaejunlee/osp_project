@@ -25,13 +25,13 @@
             {% if post.successful == True %}
             <div>
                 <h2>elapsedTime</h2>
-                <p>{{ post.elapsedTime }}</p>
+                <p>{{ "%.2f"|format(post.elapsedTime) }} sec</p>
                 <h2>totalWordCount</h2>
                 <p>{{ post.totalWordCount }}</p>
                 <h2>index</h2>
                 <p>{{ post.index }}</p>
                 <h2>url</h2>
-                <a>{{ post.url }}</a>
+                <a href="{{ post.url }}" target='_blank'>{{ post.url }}</a>
             </div>
 
                 {% if url_len == True %}
@@ -65,7 +65,7 @@
             {% if post.successful == False %}
             <div>
                 <h2>elapsedTime</h2>
-                <p style="color: red">{{ post.elapsedTime }}</p>
+                <p style="color: red">{{ "%.2f"|format(post.elapsedTime) }} second</p>
                 <h2>totalWordCount</h2>
                 <p style="color: red">{{ post.totalWordCount }}</p>
                 <h2>index</h2>

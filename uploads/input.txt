@@ -3,3 +3,7 @@ http://incubator.apache.org/
 http://cassandra.apache.org/
 http://iceberg.apache.org/
 https://sling.apache.org/
+http://isis.apache.org/
+http://spark.apache.org/
+http://whimsical.apache.org/
+http://flex.apache.org/
