@@ -13,29 +13,31 @@
         strong {
             color: darkblue;
         }
-    </style>
+        </style>
 </head>
 
 <body class="body" >
     <!-- 제목, url, 시간 div -->
-    <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
-        <div class="top10">
-            TOP 3
-            <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
-        </div>
-        <div class="top10_url">
-            www.naver.com
-        </div>
-        <div class="top10_time">
-            Elapsed Time : 123
-            <!--
-            <div>
-                <h2>Elapsed Time</h2>
-                <p>{{ elapsedTime }}</p>
-            </div> -->
+    <div style="width:80%;margin-left: 10%;margin-right:10%;">
+        <div class="container">
+            <div class="neon">
+                TOP 3
+                <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
+            </div>
+            <div class="flux">
+                www.naver.com
+            </div>
+            <div class="top10_time">
+                Elapsed Time : 123
+                <!--<div>
+                    <h2>Elapsed Time</h2>
+                    <p>{{ elapsedTime }}</p>
+                </div> -->
+            </div>
+
         </div>
     </div>
-
+    
     <!--{% block content %}-->
     <div>
         <!--{% for post in posts %}-->

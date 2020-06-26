@@ -10,42 +10,54 @@
             padding: 30px;
         }
 
-        strong {
+        z strong {
             color: darkblue;
         }
     </style>
 </head>
 
 <body class="body">
-    <body class="body">
-        <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
-            <div class="top10">
+    <div style="width:80%;margin-left: 10%;margin-right:10%;">
+        <div class="container">
+            <div class="neon">
                 TOP 10
             </div>
-            <div class="top10_url">
+            <div class="flux">
                 www.naver.com
             </div>
             <div class="top10_time">
                 Elapsed Time : 123
             </div>
-    
+
         </div>
+    </div>
         <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
-    
+
         <!--{% block content %}-->
         <div style="width:100%">
             <!--{% for post in posts %}-->
             <div id="table" style="margin-left: 10%;margin-right: 10%;">
-    
+                <div class="list_row0">
+                    <div class="list_num0">
+                        No.
+                    </div>
+                    <div class="list_word0">
+                        <span class="list_word10">word</span>
+                        <div class="list_word10">
+                            <span class="list_word20">score</span>
+                            <span class="list_word20">count</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="list_row">
                     <div class="list_num">
                         1
                     </div>
                     <div class="list_word">
-                        <span class="list_word1">word</span>
+                        <span class="list_word1">osp</span>
                         <div class="list_word1">
-                            <span class="list_word2">score<br>123</span>
-                            <span class="list_word2">count<br>987</span>
+                            <span class="list_word2">123</span>
+                            <span class="list_word2">987</span>
                         </div>
                     </div>
                 </div>
@@ -56,8 +68,8 @@
                     <div class="list_word">
                         <span class="list_word1">orange</span>
                         <div class="list_word1">
-                            <span class="list_word2">score<br>320</span>
-                            <span class="list_word2">count<br>983</span>
+                            <span class="list_word2">123</span>
+                            <span class="list_word2">987</span>
                         </div>
                     </div>
                 </div>
@@ -68,8 +80,8 @@
                     <div class="list_word">
                         <span class="list_word1">hochaeng</span>
                         <div class="list_word1">
-                            <span class="list_word2">score<br>320</span>
-                            <span class="list_word2">count<br>785</span>
+                            <span class="list_word2">123</span>
+                            <span class="list_word2">987</span>
                         </div>
                     </div>
                 </div>
@@ -80,29 +92,29 @@
                     <div class="list_word">
                         <span class="list_word1">cjdropthebeat</span>
                         <div class="list_word1">
-                            <span class="list_word2">score<br>111</span>
-                            <span class="list_word2">count<br>345</span>
+                            <span class="list_word2">123</span>
+                            <span class="list_word2">987</span>
                         </div>
                     </div>
                 </div>
-    
+
             </div>
-    
+
             <!--{% endfor %}-->
-    
+
         </div>
         <!--{% endblock %}-->
-    
+
         <!--
         <div>
             <h2>Elapsed Time</h2>
             <p>{{ elapsedTime }}</p>
         </div>
         -->
-    </body>
-    <!--{% endblock %}-->
 
-    <!--
+        <!--{% endblock %}-->
+
+        <!--
     <div>
         <h2>Elapsed Time</h2>
         <p>{{ elapsedTime }}</p>
