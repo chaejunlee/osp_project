@@ -16,25 +16,30 @@
     </style>
 </head>
 
-<body class="body">
+<body class="body" >
+    <!-- 제목, url, 시간 div -->
     <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
         <div class="top10">
             TOP 3
+            <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
         </div>
         <div class="top10_url">
             www.naver.com
         </div>
         <div class="top10_time">
             Elapsed Time : 123
+            <!--
+            <div>
+                <h2>Elapsed Time</h2>
+                <p>{{ elapsedTime }}</p>
+            </div> -->
         </div>
     </div>
-    <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
 
     <!--{% block content %}-->
     <div>
         <!--{% for post in posts %}-->
         <div id="table" style="margin-left: 10%;margin-right: 10%;">
-
             <div class="list_row">
                 <div class="list_num">
                     1
@@ -54,18 +59,8 @@
                 <span class="top3">swedu.knu.ac.kr</span>
             </div>
         </div>
-
         <!--{% endfor %}-->
-
     </div>
     <!--{% endblock %}-->
-
-    <!--
-    <div>
-        <h2>Elapsed Time</h2>
-        <p>{{ elapsedTime }}</p>
-    </div>
-    -->
 </body>
-
 </html>

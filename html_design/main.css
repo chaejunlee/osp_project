@@ -1,6 +1,10 @@
 body {
   background: linear-gradient(135deg, #313b53 0%,#1a1d26 100%);
   text-align: center;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .RESULT_head{
