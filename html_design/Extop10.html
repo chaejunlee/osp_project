@@ -17,18 +17,74 @@
 </head>
 
 <body class="body">
-    <h1>Top 10: {{ index }} ({{ url }})</h1>
+    <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
+        <div class="top10">
+            TOP 10
+        </div>
+        <div class="top10_url">
+            www.naver.com
+        </div>
+        <div class="top10_time">
+            Elapsed Time : 123
+        </div>
+
+    </div>
+    <!--<h1>Top 10: {{ index }} ({{ url }})</h1>-->
 
     <!--{% block content %}-->
-    <div>
+    <div style="width:100%">
         <!--{% for post in posts %}-->
-        <div class="list">
-            <div class="list_num">
-                1
+        <div id="table" style="margin-left: 10%;margin-right: 10%;">
+
+            <div class="list_row">
+                <div class="list_num">
+                    1
+                </div>
+                <div class="list_word">
+                    <span class="list_word1">word</span>
+                    <div class="list_word1">
+                        <span class="list_word2">score<br>123</span>
+                        <span class="list_word2">count<br>987</span>
+                    </div>
+                </div>
             </div>
-            <div class="list_word">
-                word 1234
+            <div class="list_row">
+                <div class="list_num">
+                    2
+                </div>
+                <div class="list_word">
+                    <span class="list_word1">orange</span>
+                    <div class="list_word1">
+                        <span class="list_word2">score<br>320</span>
+                        <span class="list_word2">count<br>983</span>
+                    </div>
+                </div>
             </div>
+            <div class="list_row">
+                <div class="list_num">
+                    3
+                </div>
+                <div class="list_word">
+                    <span class="list_word1">hochaeng</span>
+                    <div class="list_word1">
+                        <span class="list_word2">score<br>320</span>
+                        <span class="list_word2">count<br>785</span>
+                    </div>
+                </div>
+            </div>
+            <div class="list_row">
+                <div class="list_num">
+                    4
+                </div>
+                <div class="list_word">
+                    <span class="list_word1">cjdropthebeat</span>
+                    <div class="list_word1">
+                        <span class="list_word2">score<br>111</span>
+                        <span class="list_word2">count<br>345</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!--{% endfor %}-->
@@ -36,10 +92,12 @@
     </div>
     <!--{% endblock %}-->
 
+    <!--
     <div>
         <h2>Elapsed Time</h2>
         <p>{{ elapsedTime }}</p>
     </div>
+    -->
 </body>
 
 </html>
