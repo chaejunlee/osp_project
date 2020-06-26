@@ -246,6 +246,10 @@ body {
 	color: #abc0ff;
 }
 
+@font-face {
+	font-family: 'ShinMyeongJo';
+	src:url(C:\Windows\Fonts\HYShinMyeongJo.ttf) format('truetype');
+}
 .top10 {
 	text-align: center;
 	font-size:100px;
@@ -294,7 +298,7 @@ body {
 	display:table-cell;
 	margin:0px;
 	padding:0px;
-	border-top:1px solid rgb(206, 206, 206);
+	border-bottom:1px solid rgb(206, 206, 206);
 
 }
 .list_num0{
@@ -313,6 +317,7 @@ body {
 }
 
 .list_word{
+	font-family: 'ShinMyeongJo';
 	text-align: center;
 	vertical-align:middle ;
 	color:white;
@@ -323,7 +328,7 @@ body {
 	float:right;
 	margin:0px;
 	display:table-cell;
-	border-top:1px solid rgb(206, 206, 206);
+	border-bottom:1px solid rgb(206, 206, 206);
 
 }
 .list_word0{
@@ -395,11 +400,10 @@ body {
 	height:100px;
 	line-height: 100px;
 	width:100%;
-	
 	float:right;
 	margin:0px;
 	display:table-cell;
-	border-top:1px solid rgb(206, 206, 206);
+	border-bottom:1px solid rgb(206, 206, 206);
 }
 
 #table {
@@ -426,8 +430,8 @@ body {
   .neon {
 	font-family: neon;
 	color: #FB4264;
-	font-size: 9vw;
-	line-height: 9vw;
+	font-size: 120px;
+	line-height: 120px;
 	text-shadow: 0 0 3vw #F40A35;
 	text-align: center;
   }
@@ -436,14 +440,16 @@ body {
 	font-family: neon;
 	color: #426DFB;
 	font-size: 30px;
-	line-height: 9vw;
+	height:50px;
+	line-height: 50px;
 	text-shadow: 0 0 3vw #2356FF;
+	margin-top:15px;
   }
   
   .neon {
-	animation: neon 1s ease infinite;
-	-moz-animation: neon 1s ease infinite;
-	-webkit-animation: neon 1s ease infinite;
+	animation: neon 2s ease infinite;
+	-moz-animation: neon 2s ease infinite;
+	-webkit-animation: neon 2s ease infinite;
   }
   
   @keyframes neon {
