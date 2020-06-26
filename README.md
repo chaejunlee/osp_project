@@ -92,3 +92,4 @@
 - result, top10, top3.html 새로운 디자인(?) 제안
 - 그에 맞는 Extop10.html 수정 및 Exsimilar.html 파일 추가
 - 배경 그라데이션 수정
+- (22:45) 결과창 3개 디자인 갈아엎기 (Extop10, Exsimilar 수정완료)
