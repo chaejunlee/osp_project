@@ -86,3 +86,9 @@
 - top10.html, main.css 정렬, 글자 등등 수정...
 - 리스트 디자인은 일단 나중에 손보기
 - top3.html 어떻게 할지 생각하기.
+
+06/26/20 (이세은)
+---
+- result, top10, top3.html 새로운 디자인(?) 제안
+- 그에 맞는 Extop10.html 수정 및 Exsimilar.html 파일 추가
+- 배경 그라데이션 수정
