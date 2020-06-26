@@ -12,6 +12,33 @@ body {
   margin-bottom: 10px;
 }
 
+.RESULT_success{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #53f5a7;
+  width: 1000px;
+  height: 100px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
+.RESULT_fail{
+  border-width: 3px;
+  border-style: outset;
+  border-color: #f74343;
+  width: 1000px;
+  height: 100px;
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
+.RESULT_output{
+  color: #1a1d26;
+  font-size: 30px;
+  background-color: #fff;
+  opacity: 0.5;
+}
+
 .menu {
 	line-height: 1px;
 	margin:  0 auto 3em;
