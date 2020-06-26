@@ -299,6 +299,21 @@ body {
 	display:table-cell;
 }
 
+.top3 {
+	text-align: center;
+	vertical-align:middle ;
+	font-size:40px;
+	font-weight:50;
+	color:white;
+	height:100px;
+	line-height: 100px;
+	width:100%;
+	border:1px solid #313b53;
+	float:right;
+	margin:0px;
+	display:table-cell;
+}
+
 #table {
 	display: table;
 	width:80%;
