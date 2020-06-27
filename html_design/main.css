@@ -1,3 +1,4 @@
+
 body {
 	background-color: black;
 	text-align: center;
@@ -5,6 +6,20 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+.submin_btn{
+	font-family: courier;
+	width:130px;
+	height: 40px;
+	font-size:25px;
+	color: #2ba0ff;
+	font-weight: bolder;
+	text-shadow: 0 0 3vw #008dff;
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
 }
 
 .RESULT_head{
@@ -17,14 +32,14 @@ body {
 }
 
 .RESULT_success{
- 
+
   width:80%;
   border:2px solid #53f5a7;
   margin-left: 10%;
   margin-right:10%;
 }
 .RESULT_fail{
- 
+
   width:80%;
   border:2px solid #f74343;
   margin-left: 10%;
@@ -54,12 +69,13 @@ body {
 }
 
 .RESULT_output{
+	font-family: courier;
   text-align: center;
   font-size:17px;
   color: #fff;
   vertical-align:middle;
 	line-height: 25px;
-  
+
   margin:0px;
   padding:0px;
   padding-left: 10px;
@@ -87,6 +103,26 @@ body {
   margin-left:50px;
   margin-top:20px;
 }
+
+.RESULT_button2{
+	display:inline-block;
+	  vertical-align:middle;
+	font-size: 17px;
+	width: 80px;
+	height: 30px;
+	text-align: center;
+	text-decoration: none;
+	/*line-height: 35px;*/
+	outline: none;
+	background-color: rgb(146, 146, 146);
+	color: #000000;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin-left:50px;
+	margin-top:20px;
+  }
 
 .menu {
 	line-height: 1px;
@@ -196,68 +232,69 @@ body {
 }
 
 .URL_head{
-  padding-top: 230px;
-  font-size: 65px;
-  color: #fff;
-  margin: 0 auto;
-  text-align: center;
-}
+	padding-top: 180px;
+	font-size: 65px;
+	color: #fff;
+	margin: 0 auto;
+	text-align: center;
+  }
 
-.URL_txt{
-  font-size: 17px;
-  margin-top: 30px;
-  height: 40px;
-  width: 540px;
-  border: 2px solid #8cc7ff;
-  outline: none;
-}
+  .URL_txt{
+	font-size: 17px;
+	margin-top: 30px;
+	height: 40px;
+	width: 540px;
+	border: 2px solid #109fff;
+	outline: none;
+  }
 
-.URL_btn{
-    font-size: 17px;
-    margin-top: 30px;
-    display: inline-block;
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    text-decoration: none;
-    line-height: 35px;
-    outline: none;
-    background-color: #313b53;
-    border: 2px solid #313b53;
-    color: #fff;
-}
-.URL_btn::before,
-.URL_btn::after {
-	position: absolute;
-	z-index: -1;
-	display: block;
-	content: '';
-}
-.URL_btn,
-.URL_btn::before,
-.URL_btn::after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-.URL_btn:hover {
-	background-color: #fff;
-	border-color: #abc0ff;
-	color: #abc0ff;
-}
+  .URL_btn{
+		font-family: courier;
+	  font-size: 17px;
+		font-weight: 600;
+	  margin-top: 30px;
+	  display: inline-block;
+	  width: 100px;
+	  height: 40px;
+	  text-align: center;
+	  text-decoration: none;
+	  line-height: 35px;
+	  outline: none;
+	  background-color:#ffeeb3;
+	  border: 4px solid #FED128;
+	  color:c;
+  }
+  .URL_btn::before,
+  .URL_btn::after {
+	  position: absolute;
+	  z-index: -1;
+	  display: block;
+	  content: '';
+  }
+  .URL_btn,
+  .URL_btn::before,
+  .URL_btn::after {
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  -webkit-transition: all .3s;
+	  transition: all .3s;
+  }
+  .URL_btn:hover {
+	  background-color: #fff;
+	  border-color: #FED128;
+	  color:#ac8600;
+  }
 
+  .btn_box{
+	padding-top: 220px;
+	color:#ac8600;
+  }
 
-
-.btn_box{
-  padding-top: 220px;
-}
-
-.button {
-  font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  .button {
+	font-size: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
 	display: inline-block;
 	width: 200px;
 	height: 200px;
@@ -265,36 +302,57 @@ body {
 	text-decoration: none;
 	line-height: 200px;
 	outline: none;
-  background-color: #313b53;
-	border: 2px solid #313b53;
-	color: #fff;
-}
-.button::before,
-.button::after {
-	position: absolute;
-	z-index: -1;
-	display: block;
-	content: '';
-}
-.button,
-.button::before,
-.button::after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-transition: all .3s;
-	transition: all .3s;
-}
-.button:hover {
-	background-color: #fff;
-	border-color: #abc0ff;
-	color: #abc0ff;
+	/* background-color:#ffeeb3; */
+	/* border: 4px solid #FED128; */
+	/* color:#ac8600; */
+  }
+  .button::before,
+  /* .button::after {
+	  position: absolute;
+	  z-index: -1;
+	  display: block;
+	  content: '';
+  } */
+  .button,
+  .button::before,
+  /* .button::after {
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  -webkit-transition: all .3s;
+	  transition: all .3s;
+  } */
+  /* .button:hover {
+	  background-color: #fff;
+	  border-color: #FED128;
+	  color:#ac8600;
+  } */
+
+.button {
+	-webkit-animation: button 3s ease infinite;
+  font-family: courier;
+  font-size: 27px;
+  font-weight: bolder;
 }
 
-@font-face {
-	font-family: 'ShinMyeongJo';
-	src:url(C:\Windows\Fonts\HYShinMyeongJo.ttf) format('truetype');
-}
+  @keyframes button {
+	0%,
+	100% {
+	  background-color:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  box-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  /*text-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;*/
+	  color: #289efe;
+	  border-color: 4px solid #2896fe;
+	}
+	50% {
+	  background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  /*text-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;*/
+	  color: #146C80;
+	  border-color: 4px solid #146C80;
+	}
+  }
+
 .top10 {
 	text-align: center;
 	font-size:100px;
@@ -313,9 +371,10 @@ body {
 }
 
 .top10_time {
+	font-family: courier;
+	font-weight: bold;
 	text-align: right;
 	font-size:20px;
-	font-weight:3	00;
 	color:rgb(185, 185, 185);
 	margin-bottom:30px;
 }
@@ -383,7 +442,7 @@ body {
 	height:50px;
 	line-height: 50px;
 	width:100%;
-	
+
 	float:right;
 	margin:0px;
 	display:table-cell;
@@ -461,69 +520,48 @@ body {
 	border-bottom:3px solid rgb(255, 255, 255);
 }
 
-@font-face {
-	font-family: neon;
-	src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
-  }
-  
-  .container {
-	
+
+.container {
 	text-align: center;
-	vertical-align: middle;	
-  }
-  
-  .neon {
-	font-family: neon;
-	color: #FB4264;
-	font-size: 120px;
+	vertical-align: middle;
+}
+
+.neon_txt {
+	font-family: courier;
+  font-weight: bold;
+	/*color: #FB4264;*/
+  color: #109fff;
+	font-size: 100px;
 	line-height: 120px;
-	text-shadow: 0 0 3vw #F40A35;
+	/*text-shadow: 0 0 3vw #F40A35;*/
+  text-shadow: 0 0 3vw #008cff;
 	text-align: center;
-  }
-  
+}
+
   .flux {
-	font-family: neon;
-	color: #426DFB;
+	font-family: courier;
+	color: #109fff;
 	font-size: 30px;
+	font-weight: bold;
 	height:50px;
 	line-height: 50px;
-	text-shadow: 0 0 3vw #2356FF;
+	text-shadow: 0 0 3vw #008cff;
 	margin-top:15px;
   }
-  
-  .neon {
-	animation: neon 2s ease infinite;
-	-moz-animation: neon 2s ease infinite;
-	-webkit-animation: neon 2s ease infinite;
+
+
+@font-face {
+  font-family: "courier";
+  src: url('https://allfont.net/allfont.css?fonts=courier-new');
+}
+
+  a {
+	text-decoration: none;
   }
-  
-  @keyframes neon {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-	  color: #FED128;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-	  color: #806914;
-	}
+  a:visited {
+	  color: white;
+	  text-decoration: none;
   }
-  
-  .flux {
-	animation: flux 2s linear infinite;
-	-moz-animation: flux 2s linear infinite;
-	-webkit-animation: flux 2s linear infinite;
-	-o-animation: flux 2s linear infinite;
-  }
-  
-  @keyframes flux {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-	  color: #28D7FE;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-	  color: #146C80;
-	}
+  a:hover {
+	  color: grey;
   }
