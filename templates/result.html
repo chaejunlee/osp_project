@@ -1,41 +1,9 @@
-<!-- <html>
-  <link rel="stylesheet" href="../html_design/main.css" />
-  <meta charset="utf-8" />
-
-  <body>
-    <section>
-	     <h2 class="RESULT_head">Result</h2>
-
-	     <nav class="menu menu--prospero">
-         <hr />
-		       <ul class="menu__list">
-			          <li class="menu__item menu__item--current">
-				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'result.html'">Result</a>
-			          </li>
-			          <li class="menu__item">
-				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'top10.html'">TOP10</a>
-			          </li>
-			          <li class="menu__item">
-				              <a class="menu__link" href="#home_css.css" onclick="location.href = 'similar.html'">Similar</a>
-			          </li>
-		      </ul>
-        <hr />
-	     </nav>
-     </section>
-
-     <div class="RESULT_success">
-
-     </div>
-
-
-  </body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
+    <link rel="stylesheet" href="../static/main.css" />
     <meta charset="UTF-8">
     <title>Result</title>
     <style>
@@ -50,72 +18,106 @@
 </head>
 
 <body>
-    <h1>Result</h1>
+    <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
+        <div class="container">
+            <div class="neon">
+                RESULT
+            </div>
+            <div class="top10_time">
+                Elapsed Time : {{ "%.2f"|format(totalTime) }} sec
+            </div>
+        </div>
+    </div>
+    <br />
 
     {% block content %}
     <div>
         <div>
             {% for post in posts %}
             {% if post.successful == True %}
-            <div>
-                <h2>elapsedTime</h2>
-                <p>{{ "%.2f"|format(post.elapsedTime) }} sec</p>
-                <h2>totalWordCount</h2>
-                <p>{{ post.totalWordCount }}</p>
-                <h2>index</h2>
-                <p>{{ post.index }}</p>
-                <h2>url</h2>
-                <a href="{{ post.url }}" target='_blank'>{{ post.url }}</a>
+            <div class="RESULT_success">
+                <div class="RESULT_list">
+                    <div class="RESULT_url">
+                        <a href="{{ post.url }}" target="_blank"><p class="easy-flux">{{ post.url }}</p></a>
+                    </div>
+
+                    <div style="display:table-cell;width:15%">
+                        <span class="RESULT_output">전체 단어 수<br>{{ post.totalWordCount }}</span>
+                    </div>
+                    <div style="display:table-cell;width:15%">
+                        <span class="RESULT_output">처리 시간<br>{{ "%.2f"|format(post.elapsedTime) }} sec</span>
+                    </div>
+
+                    {% if url_len == True %}
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form target="_blank" action="http://localhost:8000/top10" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="tfidf" />
+                            <input type="submit" class="RESULT_button" value="Top 10" />
+                        </form>
+                    </div>
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form target="_blank" action="http://localhost:8000/cossimil" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="cossimil" />
+                            <input type="submit" class="RESULT_button" value='Similarity' />
+                        </form>
+                    </div>
+
+                    {% endif %}
+
+                    {% if url_len == False %}
+
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form action="http://localhost:8000/top10" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="tfidf" />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value="Top 10" />
+                        </form>
+                    </div>
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form action="http://localhost:8000/cossimil" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="cossimil" />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value='Similarity' />
+                        </form>
+                    </div>
+
+                    {% endif %}
+
+                </div>
             </div>
-
-                {% if url_len == True %}
-
-                    <form target="_blank" action="http://localhost:8000/top10" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                        <input type="submit" value="Top 10" />
-                    </form>
-                    <form target="_blank" action="http://localhost:8000/cossimil" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                        <input type="submit" value='Similarity' />
-                    </form>
-                
-                {% endif %}
-
-                {% if url_len == False %}
-
-                    <form action="http://localhost:8000/top10" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                        <input disabled="disabled" type="submit" value="Top 10" />
-                    </form>
-                    <form action="http://localhost:8000/cossimil" method="POST">
-                        <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                        <input disabled="disabled" type="submit" value='Similarity' />
-                    </form>
-                
-                {% endif %}
+            <br />
 
             {% endif %}
 
             {% if post.successful == False %}
-            <div>
-                <h2>elapsedTime</h2>
-                <p style="color: red">{{ "%.2f"|format(post.elapsedTime) }} second</p>
-                <h2>totalWordCount</h2>
-                <p style="color: red">{{ post.totalWordCount }}</p>
-                <h2>index</h2>
-                <p style="color: red">{{ post.index }}</p>
-                <h2>url</h2>
-                <a style="color: red">{{ post.url }}</a>
-            </div>
 
-            <form action="http://localhost:8000/top10" method="POST">
-                <input type="hidden" value="{{ post.index }}" name="tfidf" />
-                <input disabled="disabled" type="submit" value="Top 10" />
-            </form>
-            <form action="http://localhost:8000/cossimil" method="POST">
-                <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                <input disabled="disabled" type="submit" value='Similarity' />
-            </form>
+            <div class="RESULT_fail">
+                <div class="RESULT_list">
+                    <div class="RESULT_url">
+                        <p class="easy-neon">{{ post.index }} </p>
+                    </div>
+
+                    <div style="display:table-cell;width:15%">
+                        <span class="RESULT_output">전체 단어 수<br> - </span>
+                    </div>
+                    <div style="display:table-cell;width:15%">
+                        <span class="RESULT_output">처리 시간<br> - </span>
+                    </div>
+
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form action="http://localhost:8000/top10" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="tfidf" />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value="Top 10" />
+                        </form>
+                    </div>
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                        <form action="http://localhost:8000/cossimil" method="POST">
+                            <input type="hidden" value="{{ post.index }}" name="cossimil" />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value='Similarity' />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br />
+
             {% endif %}
 
             {% endfor %}

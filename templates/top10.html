@@ -1,55 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="../static/main.css" />
 
-<body>
-    <section>
-        <h2 class="RESULT_head">TOP10</h2>
+<head>
+    <link rel="stylesheet" href="../static/main.css" />
+    <meta charset="UTF-8">
+    <title>TOP TEN :: {{ index }}</title>
+    <style>
+        body {
+            padding: 30px;
+        }
 
-        <nav class="menu menu--prospero">
-            <hr />
-            <ul class="menu__list">
-                <li class="menu__item">
-                    <a class="menu__link" href="#" onclick="location.href = 'result.html'">Result</a>
-                </li>
-                <li class="menu__item menu__item--current">
-                    <a class="menu__link" href="#" onclick="location.href = 'top10.html'">TOP10</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link" href="#" onclick="location.href = 'similar.html'">Similar</a>
-                </li>
+        strong {
+            color: darkblue;
+        }
+    </style>
+</head>
 
-            </ul>
-            <hr />
-        </nav>
-    </section>
-
-    <div id="table" style="margin-left: 18%;margin-right: 10%;">
-        <div class="table" style="align-content: center;">
-            {% block content %}
-            <div>
-                <div>
-                    {% for post in posts %}
-                    <div class="list_row">
-                        <div class="list_num">
-                            {{ post.number }}
-                        </div>
-                        <div class="list_word">
-                            <span class="list_word1">{{ post.word }}</span>
-                            <div class="list_word1">
-                                <span class="list_word2">score<br>{{ "%.4f"|format(post.score) }}</span>
-                                <span class="list_word2">count<br>{{ post.frequency }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% endfor %}
-                </div>
-
+<body class="body">
+    <div style="width:80%;margin-left: 10%;margin-right:10%;">
+        <div class="container">
+            <div class="neon">
+                TOP TEN
             </div>
+            <div class="neon">
+                KEY WORDS
+            </div>
+            <div class="flux">
+                {{ url }}
+            </div>
+            <div class="top10_time">
+                Elapsed Time : {{ "%.2f"|format(elapsedTime) }} sec
+            </div>
+
+        </div>
+    </div>
+    <div style="width:100%">
+        <div id="table" style="margin-left: 10%;margin-right: 10%;">
+            <div class="list_row0">
+                <div class="list_num0">
+                    No.
+                </div>
+                <div class="list_word0">
+                    <span class="list_word10">word</span>
+                    <div class="list_word10">
+                        <span class="list_word20">score</span>
+                        <span class="list_word20">count</span>
+                    </div>
+                </div>
+            </div>
+
+            {% block content %}
+            {% for post in posts %}
+            <div class="list_row">
+                <div class="list_num">
+                    {{ post.number }}
+                </div>
+                <div class="list_word">
+                    <span class="list_word1"><p class="easy-flux">{{ post.word }}</p></span>
+                    <div class="list_word1">
+                        <span class="list_word2">{{ "%.4f"|format(post.score) }}</span>
+                        <span class="list_word2">{{ post.frequency }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
             {% endblock %}
 
         </div>
+
     </div>
 </body>
 

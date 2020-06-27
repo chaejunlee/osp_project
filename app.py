@@ -446,6 +446,8 @@ def upload_file():
 #----------file input----------#
 #--파일로 받으면 여기로--#
         if f:
+            start = time.time()
+
             txt = f.read()
             urls = txt.splitlines()
 
@@ -497,8 +499,10 @@ def upload_file():
                 url_len = False
             else:
                 url_len = True
+            
+            totalTime = time.time() - start
 #--결과에 대해 result.html을 렌더링 한다.--#
-            return render_template('result.html', posts=posts, url_len=url_len)
+            return render_template('result.html', posts=posts, url_len=url_len, totalTime=totalTime)
 
 
 #----------single url input----------#
@@ -508,6 +512,7 @@ def upload_file():
 #--간단하게 정리해주고--#
             url = txt
             url.replace("\n", "")
+            start = time.time()
 
             try:
 #--webcrawl(url): index(엘라스틱 서치의 index 값), elapsedTime(크롤링에 걸린 시간), totalWordCount(크롤링한 총 단어), successful(크롤링 성공 여부)--#
@@ -515,7 +520,7 @@ def upload_file():
 
 #--만약 크롤링에서 오류가 났다면 다시 main 페이지 로드--#
             except Exception:
-                return render_template('main.html', error="Something wrong happened. Please Try Again")
+                return render_template('main.html', error="Something wrong happened. Please try again.")
 
 #--webcrawl의 결과를 posts에 저장--#
             posts += [{
@@ -536,11 +541,13 @@ def upload_file():
             else:
                 url_len = True
 
+            totalTime = time.time() - start
+
 #--결과에 대해 result.html을 렌더링 한다.--#
-            return render_template('result.html', posts=posts, url_len=url_len)
+            return render_template('result.html', posts=posts, url_len=url_len, totalTime=totalTime)
 
 #--만약 크롤링에서 오류가 났다면 다시 main 페이지 로드--#
-        return render_template('main.html', error="error")
+        return render_template('main.html', error="Something wrong happend. Please try again.")
 
 #--------------------------------------#
 

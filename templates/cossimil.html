@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="../static/main.css" />
     <meta charset="UTF-8">
-    <title>Similar Websites :: {{ index }}</title>
+    <title>TOP THREE :: {{ index }}</title>
     <style>
         body {
             padding: 30px;
@@ -15,27 +16,39 @@
     </style>
 </head>
 
-<body>
-    <h1>Similar Websites: {{ index }} (<a href="{{ url }}" target="_blank">{{ url }}</a>)</h1>
+<body class="body">
+    <div style="width:80%;margin-left: 10%;margin-right:10%;">
+        <div class="container">
+            <div class="neon">
+                TOP THREE
+            </div>
+            <div class="neon">
+                Similar Websites
+            </div>
+            <div class="flux">
+                {{ url }}
+            </div>
+            <div class="top10_time">
+                Elapsed Time : {{ "%.2f"|format(elapsedTime) }} sec
+            </div>
 
-    {% block content %}
-    <div>
-        <div>
-            {% for post in posts %}
-            <article>
-                <h2>#{{ post.number }} <a href="{{ post.word }}" target="_blank">{{ post.word }}</a></h2>
-                <p>score: {{ "%.2f"|format(post.score) }}</p>
-            </article>
-
-            {% endfor %}
         </div>
-
     </div>
-    {% endblock %}
 
     <div>
-        <h2>Elapsed Time</h2>
-        <p>{{ "%.2f"|format(elapsedTime) }} sec</p>
+        <div id="table" style="margin-left: 10%;margin-right: 10%;">
+            {% block content %}
+                {% for post in posts %}
+                <div class="list_row">
+                    <div class="list_num">
+                        {{ post.number }}
+                    </div>
+                    <span class="top3"><p class="easy-flux" style="font-size: 30px;">{{ post.word }}</p></span>
+                </div>
+
+                {% endfor %}
+            {% endblock %}
+        </div>
     </div>
 </body>
 
