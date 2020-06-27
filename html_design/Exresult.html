@@ -1,23 +1,23 @@
 <html lang="en">
-  <link rel="stylesheet" href="./main.css" />
-  <meta charset="utf-8" />
+<link rel="stylesheet" href="./main.css" />
+<meta charset="utf-8" />
 
-  <head>
-      <meta charset="UTF-8">
-      <title>Result</title>
-      <style>
-          body {
-              padding: 30px;
-          }
+<head>
+  <meta charset="UTF-8">
+  <title>Result</title>
+  <style>
+    body {
+      padding: 30px;
+    }
 
-          strong {
-              color: darkblue;
-          }
-      </style>
-  </head>
+    strong {
+      color: darkblue;
+    }
+  </style>
+</head>
 
-  <body class="body">
-    <!---<section>
+<body class="body">
+  <!---<section>
 	     <h2 class="RESULT_head">Result</h2>
 
 	     <nav class="menu menu--prospero">
@@ -36,63 +36,71 @@
         <hr />
 	     </nav>
      </section>-->
-     <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
-       <div class="top10">
-         RESULT
-       </div>
-       <div class="top10_url">
-         www.naver.com
-       </div>
-       <div class="top10_time">
-         Elapsed Time : 123
-       </div>
-     </div>
-     <br />
+  <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
+    <div class="top10">
+      RESULT
+    </div>
+    <div class="top10_url">
+      www.naver.com
+    </div>
+    <div class="top10_time">
+      Elapsed Time : 123
+    </div>
+  </div>
+  <br />
 
 
-     <div class="RESULT_success">
-               <!--{% for post in posts %}-->
-        <div class="RESULT_list">
-             <div class="RESULT_url">
-                  www.chaengchaeng.com
-             </div>
+  <div class="RESULT_success">
+    <!--{% for post in posts %}-->
+    <div class="RESULT_list">
+      <div class="RESULT_url">
+        www.chaengchaeng.com
+      </div>
 
-             <div style="display:table-cell;"
-                <span class="RESULT_output">전체 단어 수<br>123</span>
-             </div>
-             <div style="display:table-cell;"
-                <span class="RESULT_output">처리 시간<br>0.1 sec</span>
-             </div>
-               <a class="RESULT_button" href="#" onclick="location.href = 'top10.html'">TOP10</a>
+      <div style="display:table-cell;width:15%">
+        <span class="RESULT_output">전체 단어 수<br>123</span>
+      </div>
+      <div style="display:table-cell;width:15%">
+        <span class="RESULT_output">처리 시간<br>0.1 sec</span>
+      </div>
+      <div style="display:table-cell; width:30%; height:50px;line-height: 50px;">
+        <input type="button" value="Top10" class="RESULT_button" onclick="window.open('Extop10.html')"
+          target="_blank" />
+        <input type="button" value="SIMILAR" class="RESULT_button" onclick="window.open('Exsimilar.html')"
+          target="_blank" />
+      </div>
+    </div>
 
-               <a class="RESULT_button" href="#" onclick="location.href = 'similar.html'">SIMILAR</a>
-        </div>
+    <!--{% endfor %}-->
+  </div>
+  <br />
+  <div class="RESULT_fail">
+    <!--{% for post in posts %}-->
+    <div class="RESULT_list">
+      <div class="RESULT_url">
+        www.chaengchaeng.com
+      </div>
 
-               <!--{% endfor %}-->
-     </div>
-     <br />
-     <div class="RESULT_fail">
-               <!--{% for post in posts %}-->
-        <div class="RESULT_list">
-             <div class="RESULT_url">
-                  www.chaengchaeng.com
-             </div>
+      <div style="display:table-cell;width:15%">
+        <span class="RESULT_output">전체 단어 수<br>123</span>
+      </div>
+      <div style="display:table-cell;width:15%">
+        <span class="RESULT_output">처리 시간<br>0.1 sec</span>
+      </div>
+      <div style="display:table-cell; width:30%; height:50px;line-height: 50px;">
+        <input type="button" value="Top10" class="RESULT_button" onclick="window.open('Extop10.html')"
+          target="_blank" />
+        <input type="button" value="SIMILAR" class="RESULT_button" onclick="window.open('Exsimilar.html')"
+          target="_blank" />
+      </div>
 
-             <div style="display:table-cell;"
-                <span class="RESULT_output">전체 단어 수<br>123</span>
-             </div>
-             <div style="display:table-cell;"
-                <span class="RESULT_output">처리 시간<br>0.1 sec</span>
-             </div>
-               <a class="RESULT_button" href="#" onclick="location.href = 'top10.html'">TOP10</a>
+    </div>
 
-               <a class="RESULT_button" href="#" onclick="location.href = 'similar.html'">SIMILAR</a>
-        </div>
-
-               <!--{% endfor %}-->
-     </div>
+    <!--{% endfor %}-->
+  </div>
 
 
 
-  </body>
+</body>
+
 </html>
