@@ -98,3 +98,8 @@
 ---
 - Exresult.html 만들고 업로드 (result 틀 최종본)
 - main.css에 Exresult.html에 쓰인 class 추가
+
+06/27/20 (이세은)
+---
+- <a> -> <input> 변경
+- html, css 전반적인 디자인 수정
