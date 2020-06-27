@@ -386,8 +386,6 @@ def webcrawl(url):
 #--문장 단위로 추출한 데이터를 단어 단위로 추출--#
     totalWordCount, dictionary, allWords = findWords(sent_list)
 
-    print(word_d)
-
 #--allWords는 전체 단어의 갯수, dictionary는 유의미한 단어의 갯수--#
 
 ###################################################
