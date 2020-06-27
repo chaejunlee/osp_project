@@ -86,3 +86,15 @@
 - top10.html, main.css 정렬, 글자 등등 수정...
 - 리스트 디자인은 일단 나중에 손보기
 - top3.html 어떻게 할지 생각하기.
+
+06/26/20 (이세은)
+---
+- result, top10, top3.html 새로운 디자인(?) 제안
+- 그에 맞는 Extop10.html 수정 및 Exsimilar.html 파일 추가
+- 배경 그라데이션 수정
+- (22:45) 결과창 3개 디자인 갈아엎기 (Extop10, Exsimilar 수정완료)
+
+06/27/20 (조호성)
+---
+- Exresult.html 만들고 업로드 (result 틀 최종본)
+- main.css에 Exresult.html에 쓰인 class 추가
