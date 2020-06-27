@@ -547,7 +547,7 @@ def upload_file():
             return render_template('result.html', posts=posts, url_len=url_len, totalTime=totalTime)
 
 #--만약 크롤링에서 오류가 났다면 다시 main 페이지 로드--#
-        return render_template('main.html', error="Something wrong happend. Please try again.")
+        return render_template('main.html', error="Something wrong happened. Please try again.")
 
 #--------------------------------------#
 

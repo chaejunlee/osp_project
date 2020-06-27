@@ -319,25 +319,21 @@ body {
   @keyframes button {
 	0%,
 	100% {
-	  background-color: 0 0 0.5vw #FA1C16, 0 0 1.5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 .2vw #FED128, .25vw .25vw .05vw #806914;
-	  box-shadow: 0 0 0.5vw #FA1C16, 0 0 1.5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 .2vw #FED128, .25vw .25vw .05vw #806914;
-	  text-shadow: 0 0 0.5vw #FA1C16, 0 0 1.5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 5vw #FA1C16, 0 0 .2vw #FED128, .25vw .25vw .05vw #806914;
-	  color: #FED128;
-	  border-color: #FED128;
+	  background-color:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  box-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  text-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  color: #289efe;
+	  border-color: 4px solid #2896fe;
 	}
 	50% {
-	  background-color: 0 0 .25vw #800E0B, 0 0 0.75vw #800E0B, 0 0 2.5vw #800E0B, 0 0 2.5vw #800E0B, 0 0 .1vw #800E0B, .25vw .25vw .05vw #40340A;
-	  box-shadow: 0 0 .25vw #800E0B, 0 0 0.75vw #800E0B, 0 0 2.5vw #800E0B, 0 0 2.5vw #800E0B, 0 0 .1vw #800E0B, .25vw .25vw .05vw #40340A;
-	  text-shadow:  0 0 .25vw #800E0B, 0 0 0.75vw #800E0B, 0 0 2.5vw #800E0B, 0 0 2.5vw #800E0B, 0 0 .1vw #800E0B, .25vw .25vw .05vw #40340A;;
-	  color: #806914;
-	  border-color: #806914;
+	  background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  text-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  color: #146C80;
+	  border-color: 4px solid #146C80;
 	}
   }
 
-@font-face {
-	font-family: 'ShinMyeongJo';
-	src:url(C:\Windows\Fonts\HYShinMyeongJo.ttf) format('truetype');
-}
 .top10 {
 	text-align: center;
 	font-size:100px;
@@ -542,7 +538,7 @@ body {
 
   .easy-flux {
 	color: #f542fb;
-	font-size: 20px;
+	font-size: 25px;
 	height:50px;
 	line-height: 50px;
 	text-shadow: 0 0 3vw #d323ff;
@@ -557,11 +553,11 @@ body {
 
   .easy-neon {
 	color: #FB4264;
-	font-size: 20px;
-	height:50px;
-	line-height: 50px;
+	font-size: 25px;
+	height:30px;
+	line-height: 30px;
 	text-shadow: 0 0 3vw #F40A35;
-	margin-top:15px;
+	margin-top:10px;
   }
   .easy-neon {
 	animation: easy-neon 3s linear infinite;
