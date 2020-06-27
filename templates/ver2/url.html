@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Web Analysis</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div style="width:80%;margin-left: 10%;margin-right:10%;margin-top:15%">
+            <div class="container">
+                <div class="flux" style="font-size:50px">
+                    Analysis
+                </div>
+            </div>
+        </div>
+        <!--<div>
+            <p class="URL_head">Analysis</p>
+        </div>-->
+        <div>
+            <form action="http://localhost:8000/analysis" method="POST" enctype="multipart/form-data">
+                <input type="text" class="URL_txt" placeholder="input the URL" name="text1"/>
+                <br />
+                <br>
+                <input class="URL_btn" type="submit" value="submit"/>
+            </form>
+        </div>
+    </body>
+</html>
