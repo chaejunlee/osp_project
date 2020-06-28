@@ -19,7 +19,7 @@ body {
 	background-color: #000000;
 	border: none;
 	background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
-	box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+  box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
 }
 
 .RESULT_head{
@@ -55,6 +55,7 @@ body {
 }
 
 .RESULT_url{
+	font-family: courier;
   text-align: center;
   vertical-align:middle;
   font-size:20px;
@@ -86,22 +87,31 @@ body {
 
 .RESULT_button{
   display:inline-block;
-    vertical-align:middle;
+  vertical-align:middle;
   font-size: 17px;
-  width: 80px;
+  width: 85px;
   height: 30px;
   text-align: center;
   text-decoration: none;
   /*line-height: 35px;*/
   outline: none;
-  background-color: #fff;
-  color: #000000;
   padding-left: 5px;
   padding-right: 5px;
   padding-top:5px;
   padding-bottom:5px;
   margin-left:50px;
   margin-top:20px;
+  border-radius: 15px;
+	font-family: courier;
+
+	color: #fff;
+	font-weight: bolder;
+	text-shadow: 0 0 3vw #fff;
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;
+  /*box-shadow: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;*/
+	border: 1px solid #fff;
 }
 
 .RESULT_button2{
