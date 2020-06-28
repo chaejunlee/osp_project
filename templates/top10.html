@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="../static/main.css" />
     <meta charset="UTF-8">
-    <title>TOP TEN :: {{ index }}</title>
+    <title>TOP 10 :: {{ index }}</title>
     <style>
         body {
             padding: 30px;
@@ -19,13 +19,10 @@
 <body class="body">
     <div style="width:80%;margin-left: 10%;margin-right:10%;">
         <div class="container">
-            <div class="neon">
-                TOP TEN
+            <div class="neon_txt" style="color: #6fc963; text-shadow: 0 0 3vw #1ade00; font-size: 70px;">
+                /* TOP 10 : KEY WORDS */
             </div>
-            <div class="neon">
-                KEY WORDS
-            </div>
-            <div class="flux">
+            <div class="neon_txt" style="color: #ed87fa; text-shadow: 0 0 1vw #e701dc; font-size: 50px;">
                 {{ url }}
             </div>
             <div class="top10_time">
@@ -56,7 +53,7 @@
                     {{ post.number }}
                 </div>
                 <div class="list_word">
-                    <span class="list_word1"><p class="easy-flux">{{ post.word }}</p></span>
+                    <span class="list_word1">{{ post.word }}</span>
                     <div class="list_word1">
                         <span class="list_word2">{{ "%.4f"|format(post.score) }}</span>
                         <span class="list_word2">{{ post.frequency }}</span>

@@ -1,3 +1,4 @@
+
 body {
 	background-color: black;
 	text-align: center;
@@ -5,6 +6,20 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+.submin_btn{
+	font-family: courier;
+	width:130px;
+	height: 40px;
+	font-size:25px;
+	color: #2ba0ff;
+	font-weight: bolder;
+	text-shadow: 0 0 3vw #008dff;
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+  box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
 }
 
 .RESULT_head{
@@ -40,6 +55,7 @@ body {
 }
 
 .RESULT_url{
+	font-family: courier;
   text-align: center;
   vertical-align:middle;
   font-size:20px;
@@ -49,11 +65,12 @@ body {
   margin:0px;
   padding:0px;
   padding-left: 50px;
-  padding-right: 100px;
-  width:45%;
+  padding-right: 50px;
+  width:40%;
 }
 
 .RESULT_output{
+	font-family: courier;
   text-align: center;
   font-size:17px;
   color: #fff;
@@ -70,42 +87,60 @@ body {
 
 .RESULT_button{
   display:inline-block;
-    vertical-align:middle;
+  vertical-align:middle;
   font-size: 17px;
-  width: 80px;
+  width: 85px;
   height: 30px;
   text-align: center;
   text-decoration: none;
   /*line-height: 35px;*/
   outline: none;
-  background-color: #fff;
-  color: #000000;
   padding-left: 5px;
   padding-right: 5px;
   padding-top:5px;
   padding-bottom:5px;
   margin-left:50px;
   margin-top:20px;
+  border-radius: 15px;
+	font-family: courier;
+
+	color: #fff;
+	font-weight: bolder;
+	text-shadow: 0 0 3vw #fff;
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;
+  /*box-shadow: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;*/
+	border: 1px solid #fff;
 }
 
 .RESULT_button2{
 	display:inline-block;
-	  vertical-align:middle;
-	font-size: 17px;
-	width: 80px;
-	height: 30px;
-	text-align: center;
-	text-decoration: none;
-	/*line-height: 35px;*/
-	outline: none;
-	background-color: rgb(146, 146, 146);
-	color: #000000;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top:5px;
-	padding-bottom:5px;
-	margin-left:50px;
-	margin-top:20px;
+  vertical-align:middle;
+  font-size: 17px;
+  width: 85px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  /*line-height: 35px;*/
+  outline: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-left:50px;
+  margin-top:20px;
+  border-radius: 15px;
+	font-family: courier;
+
+	color: rgb(71, 71, 71);
+	font-weight: bolder;
+	text-shadow: 0 0 3vw rgb(71, 71, 71);
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw rgb(71, 71, 71), 0 0 0.5vw rgb(71, 71, 71), 0 0 1vw rgb(71, 71, 71), 0 0 1vw rgb(71, 71, 71), 0 0 .05vw rgb(71, 71, 71), .1vw .1vw .05vw rgb(71, 71, 71);
+  /*box-shadow: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;*/
+	border: 1px solid rgb(71, 71, 71);
   }
 
 .menu {
@@ -228,12 +263,14 @@ body {
 	margin-top: 30px;
 	height: 40px;
 	width: 540px;
-	border: 2px solid #ffcc12;
+	border: 2px solid #109fff;
 	outline: none;
   }
 
   .URL_btn{
+		font-family: courier;
 	  font-size: 17px;
+		font-weight: 600;
 	  margin-top: 30px;
 	  display: inline-block;
 	  width: 100px;
@@ -244,7 +281,7 @@ body {
 	  outline: none;
 	  background-color:#ffeeb3;
 	  border: 4px solid #FED128;
-	  color:#ac8600;
+	  color:c;
   }
   .URL_btn::before,
   .URL_btn::after {
@@ -310,25 +347,26 @@ body {
 	  color:#ac8600;
   } */
 
-  .button {
-	animation: button 3s ease infinite;
-	-moz-animation: button 3s ease infinite;
+.button {
 	-webkit-animation: button 3s ease infinite;
-  }
+  font-family: courier;
+  font-size: 27px;
+  font-weight: bolder;
+}
 
   @keyframes button {
 	0%,
 	100% {
 	  background-color:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
 	  box-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
-	  text-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;
+	  /*text-shadow:0 0 0.3vw #109fff, 0 0 1vw #105cff, 0 0 3vw #1078ff, 0 0 3vw #10a7ff, 0 0 .1vw #8bcafe, .2vw .2vw .05vw #146180;*/
 	  color: #289efe;
 	  border-color: 4px solid #2896fe;
 	}
 	50% {
 	  background-color: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
 	  box-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
-	  text-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;
+	  /*text-shadow: 0 0 .1vw #083c80, 0 0 0.5vw #084680, 0 0 1vw #084680, 0 0 1vw #085e80, 0 0 .05vw #083880, .1vw .1vw .05vw #0A3940;*/
 	  color: #146C80;
 	  border-color: 4px solid #146C80;
 	}
@@ -352,9 +390,10 @@ body {
 }
 
 .top10_time {
+	font-family: courier;
+	font-weight: bold;
 	text-align: right;
 	font-size:20px;
-	font-weight:3	00;
 	color:rgb(185, 185, 185);
 	margin-bottom:30px;
 }
@@ -364,12 +403,14 @@ body {
 	vertical-align:middle ;
 	height:80px;
 	width:80%;
+	font-family: 'Courier New', Courier, monospace;
 }
 .list_row0{
 	display:table-row;
 	vertical-align:middle;
 	height:50px;
 	width:80%;
+	font-family: 'Courier New', Courier, monospace;
 }
 .list_num{
 	text-align: center;
@@ -413,7 +454,7 @@ body {
 	margin:0px;
 	display:table-cell;
 	border-bottom:1px solid rgb(206, 206, 206);
-
+	font-family: 'Courier New', Courier, monospace;
 }
 .list_word0{
 	text-align: center;
@@ -427,6 +468,7 @@ body {
 	margin:0px;
 	display:table-cell;
 	border-bottom:2px solid rgb(206, 206, 206);
+	font-family: 'Courier New', Courier, monospace;
 }
 
 .list_word1 {
@@ -438,7 +480,7 @@ body {
 	line-height: 80px;
 	width:60%;
 	display:table-cell;
-
+	font-family: 'Courier New', Courier, monospace;
 }
 .list_word10 {
 	text-align: center;
@@ -450,6 +492,7 @@ body {
 	line-height:50px;
 	width:60%;
 	display:table-cell;
+	font-family: 'Courier New', Courier, monospace;
 
 }
 .list_word2 {
@@ -462,6 +505,7 @@ body {
 	line-height: 80px;
 	width:300px;
 	display:table-cell;
+	font-family: 'Courier New', Courier, monospace;
 }
 .list_word20 {
 	text-align: top;
@@ -473,6 +517,7 @@ body {
 	line-height: 50px;
 	width:300px;
 	display:table-cell;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 .top3 {
@@ -498,127 +543,43 @@ body {
 	margin-right:10%;
 	border-top:3px solid rgb(255, 255, 255);
 	border-bottom:3px solid rgb(255, 255, 255);
+	font-family: 'Courier New', Courier, monospace;
 }
 
-@font-face {
-	font-family: neon;
-	src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
-  }
 
-  .container {
-
+.container {
 	text-align: center;
 	vertical-align: middle;
-  }
+}
 
-  .neon {
-	font-family: neon;
-	color: #FB4264;
-	font-size: 120px;
+.neon_txt {
+	font-family: courier;
+  font-weight: bold;
+	/*color: #FB4264;*/
+  color: #109fff;
+	font-size: 100px;
 	line-height: 120px;
-	text-shadow: 0 0 3vw #F40A35;
+	/*text-shadow: 0 0 3vw #F40A35;*/
+  text-shadow: 0 0 3vw #008cff;
 	text-align: center;
-  }
+}
 
   .flux {
-	font-family: neon;
-	color: #426DFB;
+	font-family: courier;
+	color: #109fff;
 	font-size: 30px;
+	font-weight: bold;
 	height:50px;
 	line-height: 50px;
-	text-shadow: 0 0 3vw #2356FF;
+	text-shadow: 0 0 3vw #008cff;
 	margin-top:15px;
   }
 
-  .neon {
-	animation: neon 2s ease infinite;
-	-moz-animation: neon 2s ease infinite;
-	-webkit-animation: neon 2s ease infinite;
-  }
 
-  .easy-flux {
-	color: #f542fb;
-	font-size: 25px;
-	height:50px;
-	line-height: 50px;
-	text-shadow: 0 0 3vw #d323ff;
-	margin-top:15px;
-  }
-  .easy-flux {
-	animation: easy-flux 3s linear infinite;
-	-moz-animation: easy-flux 3s linear infinite;
-	-webkit-animation: easy-flux 3s linear infinite;
-	-o-animation: easy-flux 3s linear infinite;
-  }
-
-  .easy-neon {
-	color: #FB4264;
-	font-size: 25px;
-	height:30px;
-	line-height: 30px;
-	text-shadow: 0 0 3vw #F40A35;
-	margin-top:10px;
-  }
-  .easy-neon {
-	animation: easy-neon 3s linear infinite;
-	-moz-animation: easy-neon 3s linear infinite;
-	-webkit-animation: easy-neon 3s linear infinite;
-	-o-animation: easy-neon 3s linear infinite;
-  }
-
-  @keyframes neon {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-	  color: #FED128;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-	  color: #806914;
-	}
-  }
-
-  @keyframes easy-neon {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
-	  color: #FED128;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
-	  color: #806914;
-	}
-  }
-
-  .flux {
-	animation: flux 2s linear infinite;
-	-moz-animation: flux 2s linear infinite;
-	-webkit-animation: flux 2s linear infinite;
-	-o-animation: flux 2s linear infinite;
-  }
-
-  @keyframes flux {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
-	  color: #28D7FE;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
-	  color: #146C80;
-	}
-  }
-  @keyframes easy-flux {
-	0%,
-	100% {
-	  text-shadow: 0 0 1vw #e310ff, 0 0 3vw #d710ff, 0 0 10vw #d710ff, 0 0 10vw #eb10ff, 0 0 .4vw #f48bfe, .5vw .5vw .1vw #611480;
-	  color: #da28fe;
-	}
-	50% {
-	  text-shadow: 0 0 .5vw #800880, 0 0 1.5vw #800880, 0 0 5vw #5e0880, 0 0 5vw #760880, 0 0 .2vw #800876, .5vw .5vw .1vw #400a3c;
-	  color: #801472;
-	}
-  }
+@font-face {
+  font-family: "courier";
+  src: url('https://allfont.net/allfont.css?fonts=courier-new');
+}
 
   a {
 	text-decoration: none;

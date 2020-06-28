@@ -20,8 +20,8 @@
 <body>
     <div style="width:80%;margin-right:10%;margin-left:10%;align-content: center;">
         <div class="container">
-            <div class="neon">
-                RESULT
+            <div class="neon_txt" style="color: #6fc963; text-shadow: 0 0 3vw #1ade00; font-size: 70px;">
+                /* RESULT */
             </div>
             <div class="top10_time">
                 Elapsed Time : {{ "%.2f"|format(totalTime) }} sec
@@ -42,23 +42,23 @@
                     </div>
 
                     <div style="display:table-cell;width:15%">
-                        <span class="RESULT_output">전체 단어 수<br>{{ post.totalWordCount }}</span>
+                        <span class="RESULT_output">Word Count<br>&nbsp;{{ post.totalWordCount }}</span>
                     </div>
                     <div style="display:table-cell;width:15%">
-                        <span class="RESULT_output">처리 시간<br>{{ "%.2f"|format(post.elapsedTime) }} sec</span>
+                        <span class="RESULT_output">Elapsed Time<br>&nbsp;&nbsp;{{ "%.2f"|format(post.elapsedTime) }} sec</span>
                     </div>
 
                     {% if url_len == True %}
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px; padding-top:10px;">
                         <form target="_blank" action="http://localhost:8000/top10" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="tfidf" />
                             <input type="submit" class="RESULT_button" value="Top 10" />
                         </form>
                     </div>
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px; padding-top:10px;">
                         <form target="_blank" action="http://localhost:8000/cossimil" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                            <input type="submit" class="RESULT_button" value='Similarity' />
+                            <input type="submit" class="RESULT_button" value='SIMILAR' />
                         </form>
                     </div>
 
@@ -66,16 +66,16 @@
 
                     {% if url_len == False %}
 
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px; padding-top:10px;">
                         <form action="http://localhost:8000/top10" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="tfidf" />
                             <input disabled="disabled" type="submit" class="RESULT_button2" value="Top 10" />
                         </form>
                     </div>
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px; padding-top:10px;">
                         <form action="http://localhost:8000/cossimil" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                            <input disabled="disabled" type="submit" class="RESULT_button2" value='Similarity' />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value='SIMILAR' />
                         </form>
                     </div>
 
@@ -91,27 +91,27 @@
 
             <div class="RESULT_fail">
                 <div class="RESULT_list">
-                    <div class="RESULT_url">
-                        <p class="easy-neon">{{ post.index }}</p><p class="easy-neon" style="font-size: 15px;"><i>{{ post.url }}</i></p>
+                    <div class="RESULT_url" style="color: #c96363;">
+                        {{ post.url }}
                     </div>
 
                     <div style="display:table-cell;width:15%">
-                        <span class="RESULT_output">전체 단어 수<br> - </span>
+                        <span class="RESULT_output" style="color: #c96363;">Error Type</span>
                     </div>
-                    <div style="display:table-cell;width:15%">
-                        <span class="RESULT_output">처리 시간<br> - </span>
+                    <div style="display:table-cell;width:15%;">
+                        <span class="RESULT_output" style="color: #c96363;">{{ post.index|safe }}</span>
                     </div>
 
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;padding-top:10px;">
                         <form action="http://localhost:8000/top10" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="tfidf" />
                             <input disabled="disabled" type="submit" class="RESULT_button2" value="Top 10" />
                         </form>
                     </div>
-                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px;">
+                    <div style="display:table-cell; width:20%; height:50px;line-height: 50px; padding-top:10px;">
                         <form action="http://localhost:8000/cossimil" method="POST">
                             <input type="hidden" value="{{ post.index }}" name="cossimil" />
-                            <input disabled="disabled" type="submit" class="RESULT_button2" value='Similarity' />
+                            <input disabled="disabled" type="submit" class="RESULT_button2" value='SIMILAR' />
                         </form>
                     </div>
                 </div>

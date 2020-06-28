@@ -520,7 +520,7 @@ def upload_file():
 
 #--만약 크롤링에서 오류가 났다면 다시 main 페이지 로드--#
             except Exception:
-                return render_template('main.html', error="Something wrong happened. Please try again.")
+                return render_template('main.html', error="Something wrong happened.<br>Please try again.")
 
 #--webcrawl의 결과를 posts에 저장--#
             posts += [{
@@ -547,7 +547,7 @@ def upload_file():
             return render_template('result.html', posts=posts, url_len=url_len, totalTime=totalTime)
 
 #--만약 크롤링에서 오류가 났다면 다시 main 페이지 로드--#
-        return render_template('main.html', error="Something wrong happened. Please try again.")
+        return render_template('main.html', error="Something wrong happened.<br>Please try again.")
 
 #--------------------------------------#
 

@@ -116,22 +116,31 @@ body {
 
 .RESULT_button2{
 	display:inline-block;
-	  vertical-align:middle;
-	font-size: 17px;
-	width: 80px;
-	height: 30px;
-	text-align: center;
-	text-decoration: none;
-	/*line-height: 35px;*/
-	outline: none;
-	background-color: rgb(146, 146, 146);
-	color: #000000;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top:5px;
-	padding-bottom:5px;
-	margin-left:50px;
-	margin-top:20px;
+  vertical-align:middle;
+  font-size: 17px;
+  width: 85px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  /*line-height: 35px;*/
+  outline: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-left:50px;
+  margin-top:20px;
+  border-radius: 15px;
+	font-family: courier;
+
+	color: #fff;
+	font-weight: bolder;
+	text-shadow: 0 0 3vw #fff;
+	background-color: #000000;
+	border: none;
+	background-color: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;
+  /*box-shadow: 0 0 .1vw #fff, 0 0 0.5vw #fff, 0 0 1vw #fff, 0 0 1vw #fff, 0 0 .05vw #fff, .1vw .1vw .05vw #fff;*/
+	border: 1px solid #fff;
   }
 
 .menu {
@@ -541,8 +550,8 @@ body {
   font-weight: bold;
 	/*color: #FB4264;*/
   color: #109fff;
-	font-size: 100px;
-	line-height: 120px;
+	font-size: 80px;
+	line-height: 100px;
 	/*text-shadow: 0 0 3vw #F40A35;*/
   text-shadow: 0 0 3vw #008cff;
 	text-align: center;
@@ -556,7 +565,7 @@ body {
 	height:50px;
 	line-height: 50px;
 	text-shadow: 0 0 3vw #008cff;
-	margin-top:15px;
+	margin-top:10px;
   }
 
 

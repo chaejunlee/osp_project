@@ -5,21 +5,22 @@
   <title>Web Analysis</title>
 </head>
 
-<body style="margin-left: 200px;margin-right: 200px;">
-  <div>
+<body style="margin-left: 100px;margin-right: 100px; padding-top: 50px; padding-bottom: 50px;">
+  <div class="container" style="padding-top:100px;">
     {% block content %}
+    {% if error %}
     <div>
-        <h1 style="color: pink; padding:30;">{{error}}</h1>
+        <h1 class="neon_txt" style="font-size:60px; color: pink; text-shadow: 0 0 3vw pink;">{{ error|safe }}</h1>
     </div>
-    {% endblock %}
-  </div>
-  <div class="container">
-    <div class="neon">
+    {% else %}
+    <div class="neon_txt">
       Open Source Programming
     </div>
-    <div class="neon">
-      Final Project
+    <div class="neon_txt" style="font-size:60px; color: #6fc963; text-shadow: 0 0 3vw #1ade00;">
+      /*Final Project*/
     </div>
+    {% endif %}
+    {% endblock %}
   </div>
   <div class="container" style="padding: 50px;">
     <a class="button" style="color:#ac8600; margin: 30px;" href="{{ url_for('static', filename='url.html') }}">URL INPUT</a>
