@@ -53,12 +53,12 @@ def cossimilweb():
     for data in result['hits']['hits']:
         index_list = (data['_source'].get('words'))
 
-    if (len(index_list) < 3):
-        post = [{
-            'number': -1,
-            'word': 'too little urls, insert more than 4 urls'
-        }]
-        return render_template('cossimil.html', posts=post)
+    # if (len(index_list) < 3):
+    #     post = [{
+    #         'number': -1,
+    #         'word': 'too little urls, insert more than 4 urls'
+    #     }]
+    #     return render_template('cossimil.html', elapsedTime=-1, posts=post)
 
     dictionary = {}
     posts = []
